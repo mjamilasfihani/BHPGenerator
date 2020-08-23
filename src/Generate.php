@@ -12,15 +12,7 @@ class Generate
   /**
    *
    */
-  public function __construct()
-  {
-    return;
-  }
-  
-  /**
-   *
-   */
-  public function default(string $name, array $data = [], array $optional = [])
+  public static function default(string $name = '', array $data = [], array $optional = [])
   {
     return view($name, $data, $optional);
   }
