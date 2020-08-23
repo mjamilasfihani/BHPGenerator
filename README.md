@@ -10,4 +10,12 @@ Bootstrap 4 template generator for CodeIgniter 4
 ## Tutorial
   1. Include BHPGenerator in your controller or `use BHPGenerator/Generate;`
   2. Command `echo Generate::default($name, $data, $optional);` will generate default configuration
-  3. Coming soon
+
+### Use case
+`
+public function index()
+{
+   //return view('welcome_message');
+   return Generate::default('welcome_message');
+}
+`
