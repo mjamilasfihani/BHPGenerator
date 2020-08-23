@@ -8,7 +8,7 @@ class Generate
    *
    */
   const BHP_VERSION = '1.0';
-  
+
   /**
    *
    */
