@@ -14,7 +14,15 @@ class Generate
    */
   public function __construct()
   {
-    return true;
+    return;
+  }
+  
+  /**
+   *
+   */
+  public function default(string $name, array $data = [], array $optional = [])
+  {
+    return view($name, $data, $optional);
   }
 
 }
