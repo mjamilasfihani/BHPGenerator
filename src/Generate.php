@@ -8,7 +8,7 @@ class Generate
      * echo Generate::BHP_VERSION;
      *
      */
-	const BHP_VERSION = '1.0';
+	const BHP_VERSION = '1.1';
 
     /**
      * echo Generate::default($name, $data, $optional);
@@ -45,6 +45,18 @@ class Generate
     		],
     		'directed_js' => ''
     	];
+
+        if (strpos($name, '::') && substr_count($name, '::') == 2)
+        {
+            $i = explode('::', $name);
+            $view = view($i[0], $data, $optional) .
+                    view($i[1], $data, $optional) .
+                    view($i[2], $data, $optional);
+        }
+        else
+        {
+            $view = view($name, $data, $optional);
+        }
 
     	return Template::header($header) . view($name, $data, $optional) . Template::footer($footer);
     }
