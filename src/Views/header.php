@@ -156,5 +156,5 @@ echo PHP_EOL;
 //--------------------------------------------------------------------
 
 echo str_pad(' ', 2).'<!-- Pre-Load Screen START -->'.PHP_EOL;
-echo str_pad(' ', 2).'<div class="preloader"> <div class="loading"> <img src="https://cdn.jsdelivr.net/gh/astoart/ui/astoart.com/img/loading.gif" width="100"> <p style="font-size: 1.0rem">Harap Tunggu</p> </div> </div>'.PHP_EOL;
+echo str_pad(' ', 2).'<div class="preloader"> <div class="loading"> <img src="https://cdn.jsdelivr.net/gh/astoart/ui/astoart.com/img/loading.gif" width="86"> <p style="font-size: 1.0rem">Please Wait</p> </div> </div>'.PHP_EOL;
 echo str_pad(' ', 2).'<!-- Pre-Load Screen END -->'.PHP_EOL.PHP_EOL; 
