@@ -12,10 +12,8 @@ Bootstrap 4 template generator for CodeIgniter 4
   2. Command `echo Generate::default($name, $data, $optional);` will generate default configuration
 
 ### Use case
-`
-public function index()
-{
-   //return view('welcome_message');
-   return Generate::default('welcome_message');
-}
-`
+	public function index()
+	{
+	   //return view('welcome_message');
+	   return Generate::default('welcome_message');
+	}
