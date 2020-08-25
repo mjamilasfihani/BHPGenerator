@@ -26,7 +26,7 @@ The default assets, like bootstrap is using https://github.com/astoart/ui reposi
 #### Note
 BHP.php is your html basic configuration, like meta, title and etc.
 
-#### Raw
+#### Raw | Elapsed time can be different :)
     <!DOCTYPE html>
     <html lang="en">
      <head>
