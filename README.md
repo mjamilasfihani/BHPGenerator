@@ -20,5 +20,8 @@ Bootstrap 4 template generator for CodeIgniter 4
 	   return Generate::default('your_view_name');
 	}
 
+### Alert
+The default assets, like bootstrap and shards is using https://github.com/astoart/ui repository
+
 #### Note
 BHP.php is your html basic configuration, like meta, title and etc.
