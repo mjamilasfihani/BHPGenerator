@@ -141,15 +141,7 @@ echo str_pad(' ', 1).'</head>'.PHP_EOL;
 //--------------------------------------------------------------------
 echo str_pad(' ', 1).'<body'.stringify_attributes(config('BHP')->body_config).'>';
 
-//--------------------------------------------------------------------
-// Initialize | Javascript must be enabled!!!
-//--------------------------------------------------------------------
 echo PHP_EOL.PHP_EOL;
-echo str_pad(' ', 2).'<!-- Js checker -->'.PHP_EOL;
-
-echo str_pad(' ', 2).'<noscript><div style="position: fixed; top: 0px; left: 0px; z-index: 3000; height: 100%; width: 100%; background-color: #FFFFFF"><noscript><div style="position: fixed; top: 0px; left: 0px; z-index: 3000; height: 100%; width: 100%; background-color: #FFFFFF"><div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>NOTICE!</strong> Agar fungsi di situs ini lebih baik, anda perlu mengaktifkan JavaScript. Berikut ini adalah <a href="https://www.enable-javascript.com/id/"> petunjuk cara mengaktifkan JavaScript</a> di peramban web Anda.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div></div></noscript>'.PHP_EOL;
-
-echo PHP_EOL;
 
 //--------------------------------------------------------------------
 // Everything is done, now load content.
