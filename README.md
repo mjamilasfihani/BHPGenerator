@@ -4,16 +4,21 @@ Bootstrap 4 template generator for CodeIgniter 4
 ## Installation
   1. Create folder in `app/ThirdParty/bhp-generator/src`.
   2. Copy src in this repository into it.
-  3. Create namespace `'BHPGenerator' => APPPATH . 'ThirdParty/bhp-generator/src'`
-  4. Dont forget to load `html_helper`
+  3. Create namespace `'BHPGenerator' => APPPATH . 'ThirdParty/bhp-generator/src'`.
+  4. Dont forget to load `html_helper` using `helper('html');`.
+  5. Copy BHP.php to `app/Config`.
 
 ## Tutorial
-  1. Include BHPGenerator in your controller or `use BHPGenerator/Generate;`
-  2. Command `echo Generate::default($name, $data, $optional);` will generate default configuration
+  1. Include BHPGenerator in your controller using `use BHPGenerator\Generate;`.
+  2. Command `echo Generate::default($name, $data, $optional);` will generate default configuration.
+  3. Reload your browser.
 
-### Use case
+## Use case
 	public function index()
 	{
 	   //return view('welcome_message');
-	   return Generate::default('welcome_message');
+	   return Generate::default('your_view_name');
 	}
+
+#### Note
+BHP.php is your html basic configuration, like meta, title and etc.
