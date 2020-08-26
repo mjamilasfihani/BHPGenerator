@@ -6,9 +6,10 @@ class BHP extends BaseConfig
 {
 
 	/**
+	 * HTML Configuration
 	 *
 	 */
-	public $html_config =
+	public $htmlConfig =
 	[
 		'doctype' => 'html5', // default of bootstrap 4
 		'charset' => 'utf-8', // default of bootstrap 4
@@ -17,9 +18,10 @@ class BHP extends BaseConfig
 	];
 
 	/**
+	 * META Configuration
 	 *
 	 */
-	public $meta_config =
+	public $metaConfig =
 	[
 		'description' => '',
 		'keywords'    => '',
@@ -28,8 +30,39 @@ class BHP extends BaseConfig
 	];
 
 	/**
+	 * If you want add extra attr in <body ...> write it here
 	 *
 	 */
-	public $body_config = [];
+	public $bodyConfig = [];
+
+	/**
+	 * Why you need this __construct() function?
+	 *
+	 * If you have goal like this :
+	 *
+	 *  current_url() === 'http://example.com' and the $htmlConfig['title'] = 'Title'
+	 *  current_url() === 'http://example.com/page' and the $htmlConfig['title'] = 'Title - Extra text'
+	 *
+	 * Then just doing array_merge($this->htmlConfig, $data) | But $data is array.
+	 * Here I give the example :
+	 *
+	 * if (current_url() === 'http://example.com')
+	 * {
+	 *		// your title for example.com will be Title
+	 * 		$this->htmlConfig = array_merge($this->htmlConfig, ['title' => 'Title']);
+	 * }
+	 * elseif (current_url() === 'http://example.com/page')
+	 * {
+	 *		// your title for example.com/page will be Title - Extra text
+	 *		$this->htmlConfig = array_merge($this->htmlConfig, ['title' => 'Title - Extra text']);
+	 * }
+	 *
+	 * NOTE : Wanna add more css and js while in spesific controller? Hold up, it is under development.
+	 *
+	 */
+	public function __construct()
+	{
+
+	}
 
 }

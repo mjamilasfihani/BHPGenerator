@@ -1,16 +1,16 @@
 # BHPGenerator
 Bootstrap 4 template generator for CodeIgniter 4
 
-## Installation
+## Installation | Please use v2.0
   1. Create folder in `app/ThirdParty/bhp-generator/src`.
   2. Copy src in this repository into it.
   3. Create namespace `'BHPGenerator' => APPPATH . 'ThirdParty/bhp-generator/src'`.
-  4. Dont forget to load `html_helper` using `helper('html');`.
-  5. Copy BHP.php to `app/Config`.
+  4. Copy BHP.php to `app/Config`.
+  5. Dont forget to load html helper.
 
 ## Tutorial
   1. Include BHPGenerator in your controller using `use BHPGenerator\Generate;`.
-  2. Command `echo Generate::default($name, $data, $optional);` will generate default configuration.
+  2. Command `return Generate::default($name, $data, $optional);` will generate default configuration.
   3. Reload your browser.
 
 ## Use case
@@ -19,13 +19,18 @@ Bootstrap 4 template generator for CodeIgniter 4
        //return view('welcome_message');
        return Generate::default('your_view_name');
     }
-     
-    public function index()
-    {
-       //return view('welcome_message');
-       // if you have 2 part view, use this way.
-       return Generate::default('part/header::your_view_name::part/footer');
-    }
+
+## Command | Find more in the comment
+if you have 2 part view :
+`return Generate::default('part/whatever::your_view_name')`
+
+if you have 3 part view :
+`return Generate::default('part/header::your_view_name::part/footer');`
+
+if you have 4 part view :
+`return Generate::default('part/header::extra/some_file::your_view_name::part/footer');`
+
+NOTE : So you need 5 or more part view?? Just add more ::
 
 ### Alert
 The default assets, like bootstrap is using https://github.com/astoart/ui repository. This third-party include pre-load screen.

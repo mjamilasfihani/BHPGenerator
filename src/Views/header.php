@@ -44,12 +44,12 @@ if ( ! function_exists('meta'))
 //--------------------------------------------------------------------
 // Initialize | Doctype tag.
 //--------------------------------------------------------------------
-echo doctype(config('BHP')->html_config['doctype']).PHP_EOL;
+echo doctype(config('BHP')->htmlConfig['doctype']).PHP_EOL;
 
 //--------------------------------------------------------------------
 // Open | Html tag.
 //--------------------------------------------------------------------
-echo '<html lang="'.config('BHP')->html_config['lang'].'">'.PHP_EOL;
+echo '<html lang="'.config('BHP')->htmlConfig['lang'].'">'.PHP_EOL;
 
 //--------------------------------------------------------------------
 // Open | Head tag.
@@ -59,14 +59,14 @@ echo str_pad(' ', 1).'<head>'.PHP_EOL.PHP_EOL;
 //--------------------------------------------------------------------
 // Initialize | Meta tag.
 //--------------------------------------------------------------------
-echo str_pad(' ', 2).'<!-- Charset ' .config('BHP')->html_config['charset']. ' -->'.PHP_EOL;
-echo str_pad(' ', 2).'<meta charset="' .config('BHP')->html_config['charset']. '">'.PHP_EOL.PHP_EOL;
+echo str_pad(' ', 2).'<!-- Charset ' .config('BHP')->htmlConfig['charset']. ' -->'.PHP_EOL;
+echo str_pad(' ', 2).'<meta charset="' .config('BHP')->htmlConfig['charset']. '">'.PHP_EOL.PHP_EOL;
 
 echo str_pad(' ', 2).'<!-- Required meta tags -->'.PHP_EOL;
-echo str_pad(' ', 2).meta('description' , config('BHP')->meta_config['description']);
-echo str_pad(' ', 2).meta('keywords'    , config('BHP')->meta_config['keywords']);
-echo str_pad(' ', 2).meta('author'      , config('BHP')->meta_config['author']);
-echo str_pad(' ', 2).meta('viewport'    , config('BHP')->meta_config['viewport']).PHP_EOL;
+echo str_pad(' ', 2).meta('description' , config('BHP')->metaConfig['description']);
+echo str_pad(' ', 2).meta('keywords'    , config('BHP')->metaConfig['keywords']);
+echo str_pad(' ', 2).meta('author'      , config('BHP')->metaConfig['author']);
+echo str_pad(' ', 2).meta('viewport'    , config('BHP')->metaConfig['viewport']).PHP_EOL;
 
 //--------------------------------------------------------------------
 // Initialize | Favicon.
@@ -129,7 +129,7 @@ if (! empty($directed_js))
 // Initialize | Title tag.
 //--------------------------------------------------------------------
 echo str_pad(' ', 2).'<!-- Title -->'.PHP_EOL;
-echo str_pad(' ', 2).'<title>'.config('BHP')->html_config['title'].'</title>'.PHP_EOL.PHP_EOL;
+echo str_pad(' ', 2).'<title>'.config('BHP')->htmlConfig['title'].'</title>'.PHP_EOL.PHP_EOL;
 
 //--------------------------------------------------------------------
 // Close | Head tag.
@@ -139,7 +139,7 @@ echo str_pad(' ', 1).'</head>'.PHP_EOL;
 //--------------------------------------------------------------------
 // Initialize | Body class and id based on ENV also MyAssets.php
 //--------------------------------------------------------------------
-echo str_pad(' ', 1).'<body'.stringify_attributes(config('BHP')->body_config).'>';
+echo str_pad(' ', 1).'<body'.stringify_attributes(config('BHP')->bodyConfig).'>';
 
 echo PHP_EOL.PHP_EOL;
 
