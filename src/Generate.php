@@ -69,7 +69,16 @@ class Generate
      *
      * $data =
      * [
-     *      '::header' => ['external_css' => ['http://example.com/assets/app.css']]
+     *      '::header' =>
+     *      [
+     *          'external_css' => ['http://example.com/assets/app.css', 'more', 'and more'],
+     *          'directed_css' => 'write your css here',
+     *          'directed_js'  => 'write your js here'
+     *      ],
+     *      '::footer' =>
+     *      [
+     *          'directed_js' => 'write your js here'
+     *      ]
      * ];
      * return Generate::default('your_view_name', $data);
      *
@@ -86,7 +95,7 @@ class Generate
 
         if (! empty($data['::header']['directed_css']))
         {
-            $header = array_merge($header, $data['::header']['directed_css']);
+            $header = array_merge($header, [$data['::header']['directed_css']]);
         }
 
         if (! empty($data['::header']['external_js']))
@@ -96,17 +105,17 @@ class Generate
 
         if (! empty($data['::header']['directed_js']))
         {
-            $header = array_merge($header, $data['::header']['directed_js']);
+            $header = array_merge($header, [$data['::header']['directed_js']]);
         }
 
-        if (! empty($data['::header']['external_js']))
+        if (! empty($data['::footer']['external_js']))
         {
-            $footer = array_merge($header, $data['::header']['external_js']);
+            $footer = array_merge($footer, $data['::footer']['external_js']);
         }
 
-        if (! empty($data['::header']['directed_js']))
+        if (! empty($data['::footer']['directed_js']))
         {
-            $footer = array_merge($header, $data['::header']['directed_js']);
+            $footer = array_merge($footer, [$data['::footer']['directed_js']]);
         }
 
     	return Template::header($header) .
