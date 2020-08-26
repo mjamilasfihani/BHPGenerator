@@ -57,7 +57,7 @@ class BHP extends BaseConfig
 	 *		$this->htmlConfig = array_merge($this->htmlConfig, ['title' => 'Title - Extra text']);
 	 * }
 	 *
-	 * NOTE : Wanna add more css and js while in spesific controller? Hold up, it is under development.
+	 * NOTE : Wanna add more css and js while in spesific controller? Read in Generate.php
 	 *
 	 */
 	public function __construct()
