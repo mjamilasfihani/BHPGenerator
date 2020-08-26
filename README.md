@@ -30,7 +30,7 @@ if you have 3 part view :
 if you have 4 part view :
 `return Generate::default('part/header::extra/some_file::your_view_name::part/footer');`
 
-NOTE : So you need 5 or more part view?? Just add more ::
+NOTE : So you need 5 or more part view?? Just add and separate with `::`
 
 ### Alert
 The default assets, like bootstrap is using https://github.com/astoart/ui repository. This third-party include pre-load screen.
