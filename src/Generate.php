@@ -69,7 +69,7 @@ class Generate
      *
      * $data =
      * [
-     *      '::header' => ['external_css' => 'http://example.com/assets/app.css']
+     *      '::header' => ['external_css' => ['http://example.com/assets/app.css']]
      * ];
      * return Generate::default('your_view_name', $data);
      *
