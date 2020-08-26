@@ -1,7 +1,8 @@
 <?php namespace BHPGenerator;
 
-use BHPGenerator\Assets\Template;
-use BHPGenerator\Assets\Combine;
+use BHPGenerator\Assets;
+use BHPGenerator\Tools\Template;
+use BHPGenerator\Tools\Combine;
 
 class Generate
 {
@@ -12,60 +13,12 @@ class Generate
      */
 	const BHP_VERSION = '2.0';
 
-    //----------------------------------------------------------------------------------
-
-    /**
-     * Header asset
-     *
-     */
-    public static function assetHeader()
-    {
-        return
-        [
-            'external_css' =>
-            [
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/css/bootstrap.css',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/fonts/google.css',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/fontawesome/css/all.css',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/shards/css/shards.css'
-            ],
-            'directed_css' => '',
-
-            'external_js' => 
-            [
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/js/jquery.js',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/js/popper.js',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/js/bootstrap.js'
-            ],
-            'directed_js' => ''
-        ];
-    }
-
-    /**
-     * Footer asset
-     *
-     */
-    public static function assetFooter()
-    {
-        return
-        [
-            'external_js' =>
-            [
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/fontawesome/js/all.js',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/shards/js/shards.js'
-            ],
-            'directed_js' => ''
-        ];
-    }
-
-    //----------------------------------------------------------------------------------
-
     /**
      * return Generate::default($name, $data, $optional);
      *
      * Here is tutorial how to add more asset in spesific controller
      *
-     * example :
+     * example : (This features under development)
      *
      * $data =
      * [
@@ -85,42 +38,42 @@ class Generate
      */
     public static function default(string $name = '', array $data = [], array $optional = [])
     {
-        $header = \BHPGenerator\Generate::assetHeader();
-        $footer = \BHPGenerator\Generate::assetFooter();
+        $header = Assets::assetHeader();
+        $footer = Assets::assetFooter();
 
-        if (! empty($data['::header']['external_css']))
+        if (! empty($data['::header']))
         {
-            $header = array_merge($header, $data['::header']['external_css']);
+            $header = array_merge($header, $data['::header']);
         }
 
-        if (! empty($data['::header']['directed_css']))
+        if (! empty($data['::footer']))
         {
-            $header = array_merge($header, [$data['::header']['directed_css']]);
+            $footer = array_merge($footer, $data['::footer']);
         }
 
-        if (! empty($data['::header']['external_js']))
+    	return Template::header($header) . view($name, $data, $optional) . Template::footer($footer);
+    }
+
+    /**
+     * return Generate::combine($name, $data, $optional)
+     *
+     */
+    public static function combine(string $name = '', array $data = [], array $optional = [])
+    {
+        $header = Assets::assetHeader();
+        $footer = Assets::assetFooter();
+
+        if (! empty($data['::header']))
         {
-            $header = array_merge($header, $data['::header']['external_js']);
+            $header = array_merge($header, $data['::header']);
         }
 
-        if (! empty($data['::header']['directed_js']))
+        if (! empty($data['::footer']))
         {
-            $header = array_merge($header, [$data['::header']['directed_js']]);
+            $footer = array_merge($footer, $data['::footer']);
         }
 
-        if (! empty($data['::footer']['external_js']))
-        {
-            $footer = array_merge($footer, $data['::footer']['external_js']);
-        }
-
-        if (! empty($data['::footer']['directed_js']))
-        {
-            $footer = array_merge($footer, [$data['::footer']['directed_js']]);
-        }
-
-    	return Template::header($header) .
-               Combine::view($name, $data, $optional) .
-               Template::footer($footer);
+        return Template::header($header) . Combine::view($name, $data, $optional) . Template::footer($footer);
     }
 
 }

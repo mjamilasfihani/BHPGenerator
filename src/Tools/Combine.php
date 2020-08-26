@@ -1,4 +1,4 @@
-<?php namespace BHPGenerator\Assets;
+<?php namespace BHPGenerator\Tools;
 
 class Combine
 {

@@ -1,7 +1,7 @@
 # BHPGenerator
 Bootstrap 4 template generator for CodeIgniter 4
 
-## Installation | Please use version 2.0 (development)
+## Installation
   1. Create folder in `app/ThirdParty/bhp-generator/src`.
   2. Copy src in this repository into it.
   3. Create namespace `'BHPGenerator' => APPPATH . 'ThirdParty/bhp-generator/src'`.
@@ -12,6 +12,7 @@ Bootstrap 4 template generator for CodeIgniter 4
   1. Include BHPGenerator in your controller using `use BHPGenerator\Generate;`.
   2. Command `return Generate::default($name, $data, $optional);` will generate default configuration.
   3. Reload your browser.
+  4. If you want to edit the assets, there is two way : in `src/Assets.php` or in spesific controller
 
 ## Use case
     public function index()
@@ -22,18 +23,18 @@ Bootstrap 4 template generator for CodeIgniter 4
 
 ## Command | Find more in the comment
 if you have 2 part view :
-`return Generate::default('part/whatever::your_view_name')`
+`return Generate::combine('part/whatever::your_view_name')`
 
 if you have 3 part view :
-`return Generate::default('part/header::your_view_name::part/footer');`
+`return Generate::combine('part/header::your_view_name::part/footer');`
 
 if you have 4 part view :
-`return Generate::default('part/header::extra/some_file::your_view_name::part/footer');`
+`return Generate::combine('part/header::extra/some_file::your_view_name::part/footer');`
 
-NOTE : So you need 5 or more part view?? Just add and separate with `::`
+NOTE : So you need 5 or more part view?? Just using `Generate::combine()` and separate with `::`
 
 ### Alert
-The default assets, like bootstrap is using https://github.com/astoart/ui repository. This third-party include pre-load screen.
+The default assets is using https://github.com/astoart/ui repository. This third-party include pre-load screen.
 
 #### Note
 BHP.php is your html basic configuration, like meta, title and etc.
