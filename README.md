@@ -1,7 +1,7 @@
 # BHPGenerator
 Bootstrap 4 template generator for CodeIgniter 4
 
-## Installation | Please use v2.0
+## Installation | Please use version 2.0 (development)
   1. Create folder in `app/ThirdParty/bhp-generator/src`.
   2. Copy src in this repository into it.
   3. Create namespace `'BHPGenerator' => APPPATH . 'ThirdParty/bhp-generator/src'`.
