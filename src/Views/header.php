@@ -44,12 +44,12 @@ if ( ! function_exists('meta'))
 //--------------------------------------------------------------------
 // Initialize | Doctype tag.
 //--------------------------------------------------------------------
-echo doctype(config('BHP')->htmlConfig['doctype']).PHP_EOL;
+echo doctype(($options['htmlConfig']['doctype'] ?? config('\BHPGenerator\Config\BHP')->htmlConfig['doctype'])).PHP_EOL;
 
 //--------------------------------------------------------------------
 // Open | Html tag.
 //--------------------------------------------------------------------
-echo '<html lang="'.config('BHP')->htmlConfig['lang'].'">'.PHP_EOL;
+echo '<html lang="'.($options['htmlConfig']['lang'] ?? config('\BHPGenerator\Config\BHP')->htmlConfig['lang']).'">'.PHP_EOL;
 
 //--------------------------------------------------------------------
 // Open | Head tag.
@@ -57,16 +57,24 @@ echo '<html lang="'.config('BHP')->htmlConfig['lang'].'">'.PHP_EOL;
 echo str_pad(' ', 1).'<head>'.PHP_EOL.PHP_EOL;
 
 //--------------------------------------------------------------------
+// Initialize | Meta Charset tag.
+//--------------------------------------------------------------------
+echo str_pad(' ', 2).'<!-- Charset ' .($options['htmlConfig']['charset'] ?? config('\BHPGenerator\Config\BHP')->htmlConfig['charset']). ' -->'.PHP_EOL;
+echo str_pad(' ', 2).'<meta charset="' .($options['htmlConfig']['charset'] ?? config('\BHPGenerator\Config\BHP')->htmlConfig['charset']). '">'.PHP_EOL.PHP_EOL;
+
+//--------------------------------------------------------------------
 // Initialize | Meta tag.
 //--------------------------------------------------------------------
-echo str_pad(' ', 2).'<!-- Charset ' .config('BHP')->htmlConfig['charset']. ' -->'.PHP_EOL;
-echo str_pad(' ', 2).'<meta charset="' .config('BHP')->htmlConfig['charset']. '">'.PHP_EOL.PHP_EOL;
-
-echo str_pad(' ', 2).'<!-- Required meta tags -->'.PHP_EOL;
-echo str_pad(' ', 2).meta('description' , config('BHP')->metaConfig['description']);
-echo str_pad(' ', 2).meta('keywords'    , config('BHP')->metaConfig['keywords']);
-echo str_pad(' ', 2).meta('author'      , config('BHP')->metaConfig['author']);
-echo str_pad(' ', 2).meta('viewport'    , config('BHP')->metaConfig['viewport']).PHP_EOL;
+$metaConfig = array_merge(config('\BHPGenerator\Config\BHP')->metaConfig, ($options['metaConfig'] ?? []));
+if (! empty($metaConfig))
+{
+	echo str_pad(' ', 2).'<!-- Required meta tags -->'.PHP_EOL;
+	foreach ($metaConfig as $metaName => $metaValue)
+	{
+		echo str_pad(' ', 2).meta($metaName, $metaValue);
+	}
+	echo PHP_EOL;
+}
 
 //--------------------------------------------------------------------
 // Initialize | Favicon.
@@ -77,12 +85,12 @@ echo str_pad(' ', 2).link_tag(base_url('favicon.ico'), 'icon', 'image/ico').PHP_
 //--------------------------------------------------------------------
 // Initialize | External CSS.
 //--------------------------------------------------------------------
-if (! empty($external_css))
+if (! empty($options['external_css']))
 {
 	echo str_pad(' ', 2).'<!-- Load external CSS -->'.PHP_EOL;
-	for ($i=0; $i < count($external_css) ; $i++)
+	for ($i=0; $i < count($options['external_css']) ; $i++)
 	{
-		echo str_pad(' ', 2).link_tag($external_css[$i]).PHP_EOL;
+		echo str_pad(' ', 2).link_tag($options['external_css'][$i]).PHP_EOL;
 	}
 	echo PHP_EOL;
 }
@@ -90,28 +98,21 @@ if (! empty($external_css))
 //--------------------------------------------------------------------
 // Initialize | Directed CSS.
 //--------------------------------------------------------------------
-if (! empty($directed_css))
+if (! empty($options['directed_css']))
 {
 	echo str_pad(' ', 2).'<!-- Load directed CSS -->'.PHP_EOL;
-	echo str_pad(' ', 2).'<style type="text/css">'.$directed_css.'</style>'.PHP_EOL.PHP_EOL;
+	echo str_pad(' ', 2).'<style type="text/css">'.$options['directed_css'].'</style>'.PHP_EOL.PHP_EOL;
 }
-
-//--------------------------------------------------------------------
-// Initialize Pre-Load CSS.
-//--------------------------------------------------------------------
-
-echo str_pad(' ', 2).'<!-- Pre-Load Screen CSS -->'.PHP_EOL;
-echo str_pad(' ', 2).'<style type="text/css"> .preloader {position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background-color: #fff; } .loading {position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font: 14px arial; } </style>'.PHP_EOL.PHP_EOL;
 
 //--------------------------------------------------------------------
 // Initialize | External JS.
 //--------------------------------------------------------------------
-if (! empty($external_js))
+if (! empty($options['external_js']))
 {
 	echo str_pad(' ', 2).'<!-- Load external JS  -->'.PHP_EOL;
-	for ($i=0; $i < count($external_js) ; $i++)
+	for ($i=0; $i < count($options['external_js']) ; $i++)
 	{
-		echo str_pad(' ', 2).script_tag($external_js[$i]).PHP_EOL;
+		echo str_pad(' ', 2).script_tag($options['external_js'][$i]).PHP_EOL;
 	}
 	echo PHP_EOL;
 }
@@ -119,17 +120,23 @@ if (! empty($external_js))
 //--------------------------------------------------------------------
 // Initialize | Directed JS.
 //--------------------------------------------------------------------
-if (! empty($directed_js))
+if (! empty($options['directed_js']))
 {
 	echo str_pad(' ', 2).'<!-- Load directed JS -->'.PHP_EOL;
-	echo str_pad(' ', 2).'<script type="text/javascript">'.$directed_js.'</script>'.PHP_EOL.PHP_EOL;
+	echo str_pad(' ', 2).'<script type="text/javascript">'.$options['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
 }
+
+//--------------------------------------------------------------------
+// Initialize Pre-Load CSS.
+//--------------------------------------------------------------------
+echo str_pad(' ', 2).'<!-- Pre-Load Screen CSS -->'.PHP_EOL;
+echo str_pad(' ', 2).'<style type="text/css"> .preloader {position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background-color: #fff; } .loading {position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font: 14px arial; } </style>'.PHP_EOL.PHP_EOL;
 
 //--------------------------------------------------------------------
 // Initialize | Title tag.
 //--------------------------------------------------------------------
 echo str_pad(' ', 2).'<!-- Title -->'.PHP_EOL;
-echo str_pad(' ', 2).'<title>'.config('BHP')->htmlConfig['title'].'</title>'.PHP_EOL.PHP_EOL;
+echo str_pad(' ', 2).'<title>'.($options['htmlConfig']['title'] ?? config('\BHPGenerator\Config\BHP')->htmlConfig['title']).'</title>'.PHP_EOL.PHP_EOL;
 
 //--------------------------------------------------------------------
 // Close | Head tag.
@@ -137,9 +144,9 @@ echo str_pad(' ', 2).'<title>'.config('BHP')->htmlConfig['title'].'</title>'.PHP
 echo str_pad(' ', 1).'</head>'.PHP_EOL;
 
 //--------------------------------------------------------------------
-// Initialize | Body class and id based on ENV also MyAssets.php
+// Initialize | Body attr
 //--------------------------------------------------------------------
-echo str_pad(' ', 1).'<body'.stringify_attributes(config('BHP')->bodyConfig).'>';
+echo str_pad(' ', 1).'<body'.stringify_attributes(array_merge(config('\BHPGenerator\Config\BHP')->bodyConfig, ($options['bodyConfig'] ?? []))).'>';
 
 echo PHP_EOL.PHP_EOL;
 

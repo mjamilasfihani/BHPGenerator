@@ -3,41 +3,23 @@ Bootstrap 4 template generator for CodeIgniter 4
 
 ## Installation
   1. Create folder in `app/ThirdParty/bhp-generator/src`.
-  2. Copy src in this repository into it.
+  2. Copy src into it.
   3. Create namespace `'BHPGenerator' => APPPATH . 'ThirdParty/bhp-generator/src'`.
-  4. Copy BHP.php to `app/Config`.
-  5. Dont forget to load html helper.
+  4. Dont forget to load html helper.
 
-## Tutorial
+## Basic Using
   1. Include BHPGenerator in your controller using `use BHPGenerator\Generate;`.
-  2. Command `return Generate::default($name, $data, $optional);` will generate default configuration.
+  2. `return Generate::default('your_view_name');` will generate default view.
   3. Reload your browser.
-  4. If you want to edit the assets, there is two way : in `src/Assets.php` or in spesific controller
+  4. If you want to edit the assets, open `src/Config/Assets.php`
 
-## Use case
-    public function index()
-    {
-       //return view('welcome_message');
-       return Generate::default('your_view_name');
-    }
+Tips : Read EXAMPLE.php for more information
 
-## Command | Find more in the comment
-if you have 2 part view :
-`return Generate::combine('part/whatever::your_view_name')`
-
-if you have 3 part view :
-`return Generate::combine('part/header::your_view_name::part/footer');`
-
-if you have 4 part view :
-`return Generate::combine('part/header::extra/some_file::your_view_name::part/footer');`
-
-NOTE : So you need 5 or more part view?? Just using `Generate::combine()` and separate with `::`
-
-### Alert
-The default assets is using https://github.com/astoart/ui repository. This third-party include pre-load screen.
+### Hold up!
+The default assets is using https://github.com/astoart/ui repository. This generator include pre-load screen.
 
 #### Note
-BHP.php is your html basic configuration, like meta, title and etc.
+BHP.php is your html basic configuration, like meta, title and etc. and Assets.php is your assets configuration.
 
 #### Raw | Elapsed time can be different :)
     <!DOCTYPE html>

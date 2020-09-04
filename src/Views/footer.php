@@ -9,12 +9,12 @@ echo PHP_EOL.PHP_EOL;
 //--------------------------------------------------------------------
 // Initialize | External JS.
 //--------------------------------------------------------------------
-if (! empty($external_js))
+if (! empty($options['external_js']))
 {
 	echo str_pad(' ', 2).'<!-- Load external JS  -->'.PHP_EOL;
-	for ($i=0; $i < count($external_js) ; $i++)
+	for ($i=0; $i < count($options['external_js']) ; $i++)
 	{
-		echo str_pad(' ', 2).script_tag($external_js[$i]).PHP_EOL;
+		echo str_pad(' ', 2).script_tag($options['external_js'][$i]).PHP_EOL;
 	}
 	echo PHP_EOL;
 }
@@ -22,10 +22,10 @@ if (! empty($external_js))
 //--------------------------------------------------------------------
 // Initialize | Directed JS.
 //--------------------------------------------------------------------
-if (! empty($directed_js))
+if (! empty($options['directed_js']))
 {
 	echo str_pad(' ', 2).'<!-- Load directed JS -->'.PHP_EOL;
-	echo str_pad(' ', 2).'<script type="text/javascript">'.$directed_js.'</script>'.PHP_EOL.PHP_EOL;
+	echo str_pad(' ', 2).'<script type="text/javascript">'.$options['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
 }
 
 //--------------------------------------------------------------------
