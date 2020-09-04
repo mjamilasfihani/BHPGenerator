@@ -50,8 +50,18 @@ public function index()
 			'metaConfig' => [],
 			'bodyConfig' => [],
 
-			// More command is coming soon
-			//
+			'headerAsset' =>
+			[
+				'external_css' => [],
+				'directed_css' => '',
+				'external_js' => [],
+				'directed_js' => '',
+			],
+			'footerAsset' =>
+			[
+				'external_js' => [],
+				'directed_js' => [],
+			]
 		]
 	];
 

@@ -95,6 +95,15 @@ if (! empty($options['external_css']))
 	echo PHP_EOL;
 }
 
+if (! empty($options['headerAsset']['external_css']))
+{
+	for ($i=0; $i < count($options['headerAsset']['external_css']) ; $i++)
+	{
+		echo str_pad(' ', 2).link_tag($options['headerAsset']['external_css'][$i]).PHP_EOL;
+	}
+	echo PHP_EOL;
+}
+
 //--------------------------------------------------------------------
 // Initialize | Directed CSS.
 //--------------------------------------------------------------------
@@ -102,6 +111,11 @@ if (! empty($options['directed_css']))
 {
 	echo str_pad(' ', 2).'<!-- Load directed CSS -->'.PHP_EOL;
 	echo str_pad(' ', 2).'<style type="text/css">'.$options['directed_css'].'</style>'.PHP_EOL.PHP_EOL;
+}
+
+if (! empty($options['headerAsset']['directed_css']))
+{
+	echo str_pad(' ', 2).'<style type="text/css">'.$options['headerAsset']['directed_css'].'</style>'.PHP_EOL.PHP_EOL;
 }
 
 //--------------------------------------------------------------------
@@ -117,6 +131,15 @@ if (! empty($options['external_js']))
 	echo PHP_EOL;
 }
 
+if (! empty($options['headerAsset']['external_js']))
+{
+	for ($i=0; $i < count($options['headerAsset']['external_js']) ; $i++)
+	{
+		echo str_pad(' ', 2).script_tag($options['headerAsset']['external_js'][$i]).PHP_EOL;
+	}
+	echo PHP_EOL;
+}
+
 //--------------------------------------------------------------------
 // Initialize | Directed JS.
 //--------------------------------------------------------------------
@@ -124,6 +147,11 @@ if (! empty($options['directed_js']))
 {
 	echo str_pad(' ', 2).'<!-- Load directed JS -->'.PHP_EOL;
 	echo str_pad(' ', 2).'<script type="text/javascript">'.$options['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
+}
+
+if (! empty($options['headerAsset']['directed_js']))
+{
+	echo str_pad(' ', 2).'<script type="text/javascript">'.$options['headerAsset']['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
 }
 
 //--------------------------------------------------------------------

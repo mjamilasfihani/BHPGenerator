@@ -11,7 +11,7 @@ class Generate
      * return Generate::BHP_VERSION;
      *
      */
-	const BHP_VERSION = '2.0';
+	const BHP_VERSION = '2.1';
 
     /**
      * return Generate::default($name, $data, $optional);
