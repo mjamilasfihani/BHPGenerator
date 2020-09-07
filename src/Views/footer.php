@@ -9,14 +9,17 @@ echo PHP_EOL.PHP_EOL;
 //--------------------------------------------------------------------
 // Initialize | External JS.
 //--------------------------------------------------------------------
-if (! empty($options['external_js']))
+if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
 {
-	echo str_pad(' ', 2).'<!-- Load external JS  -->'.PHP_EOL;
-	for ($i=0; $i < count($options['external_js']) ; $i++)
+	if (! empty($options['external_js']))
 	{
-		echo str_pad(' ', 2).script_tag($options['external_js'][$i]).PHP_EOL;
+		echo str_pad(' ', 2).'<!-- Load external JS  -->'.PHP_EOL;
+		for ($i=0; $i < count($options['external_js']) ; $i++)
+		{
+			echo str_pad(' ', 2).script_tag($options['external_js'][$i]).PHP_EOL;
+		}
+		echo PHP_EOL;
 	}
-	echo PHP_EOL;
 }
 
 if (! empty($options['footerAsset']['external_js']))
@@ -31,10 +34,13 @@ if (! empty($options['footerAsset']['external_js']))
 //--------------------------------------------------------------------
 // Initialize | Directed JS.
 //--------------------------------------------------------------------
-if (! empty($options['directed_js']))
+if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
 {
-	echo str_pad(' ', 2).'<!-- Load directed JS -->'.PHP_EOL;
-	echo str_pad(' ', 2).'<script type="text/javascript">'.$options['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
+	if (! empty($options['directed_js']))
+	{
+		echo str_pad(' ', 2).'<!-- Load directed JS -->'.PHP_EOL;
+		echo str_pad(' ', 2).'<script type="text/javascript">'.$options['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
+	}
 }
 
 if (! empty($options['footerAsset']['directed_js']))

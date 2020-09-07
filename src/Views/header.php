@@ -85,14 +85,17 @@ echo str_pad(' ', 2).link_tag(base_url('favicon.ico'), 'icon', 'image/ico').PHP_
 //--------------------------------------------------------------------
 // Initialize | External CSS.
 //--------------------------------------------------------------------
-if (! empty($options['external_css']))
+if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
 {
-	echo str_pad(' ', 2).'<!-- Load external CSS -->'.PHP_EOL;
-	for ($i=0; $i < count($options['external_css']) ; $i++)
+	if (! empty($options['external_css']))
 	{
-		echo str_pad(' ', 2).link_tag($options['external_css'][$i]).PHP_EOL;
+		echo str_pad(' ', 2).'<!-- Load external CSS -->'.PHP_EOL;
+		for ($i=0; $i < count($options['external_css']) ; $i++)
+		{
+			echo str_pad(' ', 2).link_tag($options['external_css'][$i]).PHP_EOL;
+		}
+		echo PHP_EOL;
 	}
-	echo PHP_EOL;
 }
 
 if (! empty($options['headerAsset']['external_css']))
@@ -107,10 +110,13 @@ if (! empty($options['headerAsset']['external_css']))
 //--------------------------------------------------------------------
 // Initialize | Directed CSS.
 //--------------------------------------------------------------------
-if (! empty($options['directed_css']))
+if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
 {
-	echo str_pad(' ', 2).'<!-- Load directed CSS -->'.PHP_EOL;
-	echo str_pad(' ', 2).'<style type="text/css">'.$options['directed_css'].'</style>'.PHP_EOL.PHP_EOL;
+	if (! empty($options['directed_css']))
+	{
+		echo str_pad(' ', 2).'<!-- Load directed CSS -->'.PHP_EOL;
+		echo str_pad(' ', 2).'<style type="text/css">'.$options['directed_css'].'</style>'.PHP_EOL.PHP_EOL;
+	}
 }
 
 if (! empty($options['headerAsset']['directed_css']))
@@ -121,14 +127,17 @@ if (! empty($options['headerAsset']['directed_css']))
 //--------------------------------------------------------------------
 // Initialize | External JS.
 //--------------------------------------------------------------------
-if (! empty($options['external_js']))
+if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
 {
-	echo str_pad(' ', 2).'<!-- Load external JS  -->'.PHP_EOL;
-	for ($i=0; $i < count($options['external_js']) ; $i++)
+	if (! empty($options['external_js']))
 	{
-		echo str_pad(' ', 2).script_tag($options['external_js'][$i]).PHP_EOL;
+		echo str_pad(' ', 2).'<!-- Load external JS  -->'.PHP_EOL;
+		for ($i=0; $i < count($options['external_js']) ; $i++)
+		{
+			echo str_pad(' ', 2).script_tag($options['external_js'][$i]).PHP_EOL;
+		}
+		echo PHP_EOL;
 	}
-	echo PHP_EOL;
 }
 
 if (! empty($options['headerAsset']['external_js']))
@@ -143,10 +152,13 @@ if (! empty($options['headerAsset']['external_js']))
 //--------------------------------------------------------------------
 // Initialize | Directed JS.
 //--------------------------------------------------------------------
-if (! empty($options['directed_js']))
+if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
 {
-	echo str_pad(' ', 2).'<!-- Load directed JS -->'.PHP_EOL;
-	echo str_pad(' ', 2).'<script type="text/javascript">'.$options['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
+	if (! empty($options['directed_js']))
+	{
+		echo str_pad(' ', 2).'<!-- Load directed JS -->'.PHP_EOL;
+		echo str_pad(' ', 2).'<script type="text/javascript">'.$options['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
+	}
 }
 
 if (! empty($options['headerAsset']['directed_js']))
