@@ -3,13 +3,12 @@
 //--------------------------------------------------------------------
 // End of docuemnt
 //--------------------------------------------------------------------
-
 echo PHP_EOL.PHP_EOL;
 
 //--------------------------------------------------------------------
 // Initialize | External JS.
 //--------------------------------------------------------------------
-if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
+if ($options['assetReplace'] == false)
 {
 	if (! empty($options['external_js']))
 	{
@@ -34,7 +33,7 @@ if (! empty($options['footerAsset']['external_js']))
 //--------------------------------------------------------------------
 // Initialize | Directed JS.
 //--------------------------------------------------------------------
-if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
+if ($options['assetReplace'] == false)
 {
 	if (! empty($options['directed_js']))
 	{
@@ -72,5 +71,6 @@ echo str_pad(' ', 1).'</body>'.PHP_EOL;
 echo '</html>';
 
 //--------------------------------------------------------------------
-// Everything is done. Asset has finished their job.
+// Everything is done. Asset has finished their job & Reset the val
 //--------------------------------------------------------------------
+$options = [];

@@ -1,6 +1,7 @@
 <?php namespace BHPGenerator;
 
 use BHPGenerator\Core\Assets;
+use BHPGenerator\Core\Filters;
 use BHPGenerator\Core\Template;
 use BHPGenerator\Core\Tools;
 
@@ -11,7 +12,7 @@ class Generate
      * return Generate::BHP_VERSION;
      *
      */
-	const BHP_VERSION = '2.2';
+	const BHP_VERSION = '2.3';
 
     /**
      * return Generate::default($name, $data, $optional);
@@ -20,7 +21,7 @@ class Generate
     public static function default(string $name = '', array $data = [], array $optional = [])
     {
     	return Template::header(Assets::header(), ($optional['BHPConfig'] ?? [])) .
-               Tools::default($name, $data, $optional) .
+               Tools::default($name, $data, (Filters::optional($optional))) .
                Template::footer(Assets::footer(), ($optional['BHPConfig'] ?? []));
     }
 
@@ -31,7 +32,7 @@ class Generate
     public static function combine(string $name = '', array $data = [], array $optional = [])
     {
         return Template::header(Assets::header(), ($optional['BHPConfig'] ?? [])) .
-               Tools::combine($name, $data, $optional) .
+               Tools::combine($name, $data, (Filters::optional($optional))) .
                Template::footer(Assets::footer(), ($optional['BHPConfig'] ?? []));
     }
 

@@ -85,7 +85,7 @@ echo str_pad(' ', 2).link_tag(base_url('favicon.ico'), 'icon', 'image/ico').PHP_
 //--------------------------------------------------------------------
 // Initialize | External CSS.
 //--------------------------------------------------------------------
-if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
+if ($options['assetReplace'] == false)
 {
 	if (! empty($options['external_css']))
 	{
@@ -110,7 +110,7 @@ if (! empty($options['headerAsset']['external_css']))
 //--------------------------------------------------------------------
 // Initialize | Directed CSS.
 //--------------------------------------------------------------------
-if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
+if ($options['assetReplace'] == false)
 {
 	if (! empty($options['directed_css']))
 	{
@@ -127,7 +127,7 @@ if (! empty($options['headerAsset']['directed_css']))
 //--------------------------------------------------------------------
 // Initialize | External JS.
 //--------------------------------------------------------------------
-if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
+if ($options['assetReplace'] == false)
 {
 	if (! empty($options['external_js']))
 	{
@@ -152,7 +152,7 @@ if (! empty($options['headerAsset']['external_js']))
 //--------------------------------------------------------------------
 // Initialize | Directed JS.
 //--------------------------------------------------------------------
-if (in_array(current_url(), config('\BHPGenerator\Config\Assets')->spesificURI) == false)
+if ($options['assetReplace'] == false)
 {
 	if (! empty($options['directed_js']))
 	{
@@ -193,7 +193,11 @@ echo PHP_EOL.PHP_EOL;
 //--------------------------------------------------------------------
 // Everything is done, now load content.
 //--------------------------------------------------------------------
-
 echo str_pad(' ', 2).'<!-- Pre-Load Screen START -->'.PHP_EOL;
 echo str_pad(' ', 2).'<div class="preloader"> <div class="loading"> <img src="https://cdn.jsdelivr.net/gh/astoart/ui/astoart.com/img/loading.gif" width="86"> <p style="font-size: 1.0rem">Please Wait</p> </div> </div>'.PHP_EOL;
 echo str_pad(' ', 2).'<!-- Pre-Load Screen END -->'.PHP_EOL.PHP_EOL; 
+
+//--------------------------------------------------------------------
+// Reset options val
+//--------------------------------------------------------------------
+$options = [];

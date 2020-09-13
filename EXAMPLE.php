@@ -61,7 +61,14 @@ public function index()
 			[
 				'external_js' => [],
 				'directed_js' => [],
-			]
+			],
+
+			// if you change this to true (bool), it will use this assets configuration
+			// assets in Config/Assets.php will not use.
+			//
+			// default value is false
+			//
+			'assetReplace' => false
 		]
 	];
 

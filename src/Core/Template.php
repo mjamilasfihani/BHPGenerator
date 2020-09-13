@@ -6,17 +6,27 @@ class Template
 	/**
 	 *
 	 */
-	public static function header(array $assets = [], array $config = [])
+	public static function header(array $assets = [], array $bhp_config = [])
 	{
-		return view('\BHPGenerator\Views\header', [], array_merge($assets, $config));
+		if (empty($bhp_config['assetReplace']))
+		{
+			$bhp_config['assetReplace'] = false;
+		}
+
+		return view('\BHPGenerator\Views\header', [], array_merge($assets, $bhp_config));
 	}
 
 	/**
 	 *
 	 */
-	public static function footer(array $assets = [], array $config = [])
+	public static function footer(array $assets = [], array $bhp_config = [])
 	{
-		return view('\BHPGenerator\Views\footer', [], array_merge($assets, $config));
+		if (empty($bhp_config['assetReplace']))
+		{
+			$bhp_config['assetReplace'] = false;
+		}
+
+		return view('\BHPGenerator\Views\footer', [], array_merge($assets, $bhp_config));
 	}
 
 }
