@@ -14,8 +14,6 @@ class Data
 		[
 			'BHPConfig' =>
 			[
-				'bodyConfig' => ['class' => 'app'],
-
 				'headerAsset' =>
 				[
 					'external_css' =>
