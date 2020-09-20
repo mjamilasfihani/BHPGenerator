@@ -60,6 +60,8 @@ Example use case
 
 it will add login directed css without reConfig
 
+tips : `Generate::$asset = 'stisla';` will use stisla instead, without using `initialize()` function
+
 ### Hold up!
 The default assets is using https://github.com/astoart/ui repository. This generator include pre-load screen.
 
