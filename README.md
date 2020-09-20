@@ -18,6 +18,7 @@ This is same
 
     return Generate::default('your_view_name');
     return Generate::initialize()->default('your_view_name');
+    return Generate::initialize('default')->default('your_view_name');
 
 Using stisla config
 
