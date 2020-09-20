@@ -54,9 +54,11 @@ Example use case
   
     Generate::$assetsHeader =
     [
-        'directed_css' => '.class {bg-color: dark}'
+        'directed_css' => '.login {bg-color: dark}'
     ];
     return Generate::body(['class' => 'login'])->default('your_view_name');
+
+it will add login directed css without reConfig
 
 ### Hold up!
 The default assets is using https://github.com/astoart/ui repository. This generator include pre-load screen.
