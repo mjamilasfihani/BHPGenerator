@@ -13,11 +13,15 @@ class Generate
      */
 	const BHP_VERSION = '2.5';
 
+    //--------------------------------------------------------------------
+
     /**
      *
      *
      */
     public static $asset = 'default';
+
+    //--------------------------------------------------------------------
 
     /**
      * reConfig BHP.php
@@ -27,6 +31,8 @@ class Generate
     public static $meta = [];
     public static $body = [];
 
+    //--------------------------------------------------------------------
+
     /**
      * reConfig Assets.php
      *
@@ -34,6 +40,8 @@ class Generate
     public static $assetsHeader   = [];
     public static $assetsFooter   = [];
     public static $assetsReConfig = false;
+
+    //--------------------------------------------------------------------
 
     /**
      * Construct
@@ -48,6 +56,8 @@ class Generate
         Generate::$body = $body;
     }
 
+    //--------------------------------------------------------------------
+
     /**
      *
      *
@@ -56,6 +66,8 @@ class Generate
     {
         return new Generate($config);
     }
+
+    //--------------------------------------------------------------------
 
     /**
      * html for re-config
@@ -76,6 +88,8 @@ class Generate
     {
         return new Generate(self::$asset, self::$html, self::$meta, $config);
     }
+
+    //--------------------------------------------------------------------
 
     /**
      * return Generate::default($name, $data, $optional);
@@ -98,5 +112,7 @@ class Generate
                Tools::combine($name, $data, $optional) .
                Template::footer(Assets::footer());
     }
+
+    //--------------------------------------------------------------------
 
 }
