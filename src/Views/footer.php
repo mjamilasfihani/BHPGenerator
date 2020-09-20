@@ -1,5 +1,7 @@
 <?php
 
+$bhpGenerator = new \BHPGenerator\Generate();
+
 //--------------------------------------------------------------------
 // End of docuemnt
 //--------------------------------------------------------------------
@@ -8,24 +10,20 @@ echo PHP_EOL.PHP_EOL;
 //--------------------------------------------------------------------
 // Initialize | External JS.
 //--------------------------------------------------------------------
-if ($options['assetReplace'] == false)
+if (! empty($options['external_js']) && $bhpGenerator::$assetsReConfig == false)
 {
-	if (! empty($options['external_js']))
+	for ($i=0; $i < count($options['external_js']) ; $i++)
 	{
-		echo str_pad(' ', 2).'<!-- Load external JS  -->'.PHP_EOL;
-		for ($i=0; $i < count($options['external_js']) ; $i++)
-		{
-			echo str_pad(' ', 2).script_tag($options['external_js'][$i]).PHP_EOL;
-		}
-		echo PHP_EOL;
+		echo str_pad(' ', 2).script_tag($options['external_js'][$i]).PHP_EOL;
 	}
+	echo PHP_EOL;
 }
 
-if (! empty($options['footerAsset']['external_js']))
+if (! empty($bhpGenerator::$assetsFooter['external_js']))
 {
-	for ($i=0; $i < count($options['footerAsset']['external_js']) ; $i++)
+	for ($i=0; $i < count($bhpGenerator::$assetsFooter['external_js']) ; $i++)
 	{
-		echo str_pad(' ', 2).script_tag($options['footerAsset']['external_js'][$i]).PHP_EOL;
+		echo str_pad(' ', 2).script_tag($bhpGenerator::$assetsFooter['external_js'][$i]).PHP_EOL;
 	}
 	echo PHP_EOL;
 }
@@ -33,18 +31,14 @@ if (! empty($options['footerAsset']['external_js']))
 //--------------------------------------------------------------------
 // Initialize | Directed JS.
 //--------------------------------------------------------------------
-if ($options['assetReplace'] == false)
+if (! empty($options['directed_js']) && $bhpGenerator::$assetsReConfig == false)
 {
-	if (! empty($options['directed_js']))
-	{
-		echo str_pad(' ', 2).'<!-- Load directed JS -->'.PHP_EOL;
-		echo str_pad(' ', 2).'<script type="text/javascript">'.$options['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
-	}
+	echo str_pad(' ', 2).'<script type="text/javascript">'.$options['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
 }
 
-if (! empty($options['footerAsset']['directed_js']))
+if (! empty($bhpGenerator::$assetsFooter['directed_js']))
 {
-	echo str_pad(' ', 2).'<script type="text/javascript">'.$options['footerAsset']['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
+	echo str_pad(' ', 2).'<script type="text/javascript">'.$bhpGenerator::$assetsFooter['directed_js'].'</script>'.PHP_EOL.PHP_EOL;
 }
 
 //--------------------------------------------------------------------
@@ -73,4 +67,4 @@ echo '</html>';
 //--------------------------------------------------------------------
 // Everything is done. Asset has finished their job & Reset the val
 //--------------------------------------------------------------------
-$options = [];
+unset($bhpGenerator);

@@ -13,7 +13,49 @@ Bootstrap 4 template generator for CodeIgniter 4
   3. Reload your browser.
   4. If you want to edit the assets, open `src/Config/Assets.php`
 
-Tips : Read EXAMPLE.php for more information
+### Fast Tutorial
+This is same
+
+    return Generate::default('your_view_name');
+    return Generate::initialize()->default('your_view_name');
+
+Using stisla config
+
+    return Generate::initialize('stisla')->default('your_view_name');
+
+You can add your own config, but you must follow the template. See in Config/Assets.php for more information.
+
+You must put default or combine function at last.
+Please look Config/BHP.php for more information
+
+    return Generate::initialize('stisla')
+                   ->html([])
+                   ->meta([])
+                   ->body([])
+                   ->default('your_view_name');
+
+You can also do this
+
+    return Generate::body(['class' => 'login'])->default('your_view_name');
+
+### reConfig or add new config Assets.php
+Header and Footer Assets
+Please look Config/Assets.php
+
+    Generate::$assetsHeader = [];
+    Generate::$assetsFooter = [];
+
+Want to reConfig? Just set to true, default is false
+
+    Generate::$assetsReConfig = false;
+
+Example use case
+  
+    Generate::$assetsHeader =
+    [
+        'directed_css' => '.class {bg-color: dark}'
+    ];
+    return Generate::body(['class' => 'login'])->default('your_view_name');
 
 ### Hold up!
 The default assets is using https://github.com/astoart/ui repository. This generator include pre-load screen.

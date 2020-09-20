@@ -8,7 +8,8 @@ class Assets
 	 */
 	public static function header()
 	{
-		return config('\BHPGenerator\Config\Assets')->assetHeader;
+		$initialize = \BHPGenerator\Generate::$asset;
+		return config('\BHPGenerator\Config\Assets')->$initialize['HEADER'];
 	}
 
 	/**
@@ -16,7 +17,8 @@ class Assets
 	 */
 	public static function footer()
 	{
-		return config('\BHPGenerator\Config\Assets')->assetFooter;
+		$initialize = \BHPGenerator\Generate::$asset;
+		return config('\BHPGenerator\Config\Assets')->$initialize['FOOTER'];
 	}
 
 }
