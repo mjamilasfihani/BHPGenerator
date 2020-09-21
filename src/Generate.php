@@ -11,7 +11,7 @@ class Generate
      * return Generate::BHP_VERSION;
      *
      */
-	const BHP_VERSION = '2.5';
+	const BHP_VERSION = '2.6';
 
     //--------------------------------------------------------------------
 
@@ -47,9 +47,9 @@ class Generate
      * Construct
      *
      */
-    public function __construct(string $asset = '', array $html = [], array $meta = [], array $body = [])
+    public function __construct(string $asset = 'default', array $html = [], array $meta = [], array $body = [])
     {
-        Generate::$asset = empty($asset) ? 'default' : $asset;
+        Generate::$asset = 'default';
 
         Generate::$html = $html;
         Generate::$meta = $meta;
@@ -62,7 +62,7 @@ class Generate
      *
      *
      */
-    public static function initialize(string $config = '')
+    public static function initialize(string $config = 'default')
     {
         return new Generate($config);
     }
