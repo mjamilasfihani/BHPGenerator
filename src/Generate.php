@@ -11,7 +11,7 @@ class Generate
      * return Generate::BHP_VERSION;
      *
      */
-	const BHP_VERSION = '2.6';
+    const BHP_VERSION = '2.6-rev1';
 
     //--------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ class Generate
      */
     public function __construct(string $asset = 'default', array $html = [], array $meta = [], array $body = [])
     {
-        Generate::$asset = 'default';
+        Generate::$asset = $asset;
 
         Generate::$html = $html;
         Generate::$meta = $meta;
@@ -97,7 +97,7 @@ class Generate
      */
     public static function default(string $name = '', array $data = [], array $optional = [])
     {
-    	return Template::header(Assets::header()) .
+        return Template::header(Assets::header()) .
                Tools::default($name, $data, $optional) .
                Template::footer(Assets::footer());
     }
