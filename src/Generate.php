@@ -11,7 +11,7 @@ class Generate
      * return Generate::BHP_VERSION;
      *
      */
-    const BHP_VERSION = '2.6-rev1';
+    const BHP_VERSION = '2.7';
 
     //--------------------------------------------------------------------
 
