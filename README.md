@@ -1,72 +1,74 @@
-# BHPGenerator
-Bootstrap 4 template generator for CodeIgniter 4
+# BHPGenerator v2.8
+Bootstrap 4 template generator for CodeIgniter 4 (minimum v4.0.4).
+
+## Why I made this Library?
+When I made a new view file, I always do include and include the assets file. And I hate when I need to reconfigure everything manually, in case different meta, css, js or title. So that I made this library.
 
 ## Installation
-  1. Create folder in `app/ThirdParty/bhp-generator/src`.
-  2. Copy src into it.
-  3. Create namespace `'BHPGenerator' => APPPATH . 'ThirdParty/bhp-generator/src'`.
-  4. Dont forget to load html helper.
+  1. Create folder `bhp-generator` in `app/ThirdParty`.
+  2. Copy src directory into it.
+  3. The namespace will be `'BHPGenerator' => APPPATH . 'ThirdParty/bhp-generator/src'`.
+  4. Dont forget to load html helper using `helper('html')`.
 
 ## Basic Using
   1. Include BHPGenerator in your controller using `use BHPGenerator\Generate;`.
-  2. `return Generate::default('your_view_name');` will generate default view.
+  2. `return Generate::default('your_view_name', [$data], [$option]);` will generate default view.
   3. Reload your browser.
-  4. If you want to edit the assets, open `src/Config/Assets.php`
+  4. If you want to edit the assets, open `src/Config/Assets.php`.
 
-### Fast Tutorial
-This is same
+## Advanced Using
+  1. If you have more than 1 view files, then using `return Generate::combine('view_1::view_2', [$data], [$option]);`.
+  2. You can edit basic html config in `src/Config/BHP.php`.
+
+This `initialize(string)` function is used for tell the Generator which assets will be use. In case the default value is `default`, and you can see this 3 use case is same too.
 
     return Generate::default('your_view_name');
     return Generate::initialize()->default('your_view_name');
     return Generate::initialize('default')->default('your_view_name');
 
-Using stisla config
+Anyway I include <a href="https://getstisla.com" target="_blank">Stisla</a> at this library. And here is the use case.
 
-    return Generate::initialize('stisla')->default('your_view_name');
+	return Generate::initialize('stisla')->default('your_view_name');                           // For 1 view
+	return Generate::initialize('stisla')->combine('part/header::your_view_name::part/footer'); // For 2 views or more
 
-You can add your own config, but you must follow the template. See in Config/Assets.php for more information.
+## Builtin Function
+I have created an extra function too.
+  1. `html([])` function is used to re-config `$htmlConfig`
+  2. `meta([])` function is used to re-config / add new config `$metaConfig`
+  3. `body([])` function is used to re-config / add new config `$bodyConfig`
 
-You must put default or combine function at last.
-Please look Config/BHP.php for more information
+Note : open `src/Config/BHP.php` for information
 
-    return Generate::initialize('stisla')
-                   ->html([])
-                   ->meta([])
-                   ->body([])
-                   ->default('your_view_name');
+## Unwanted Assets?
+You can add spesific assets for spesific controller, and how to do that?
+I have created :
+  1. `Generate::$assetsHeader = [];` is simillar with `'HEADER' => []`
+  2. `Generate::$assetsFooter = [];` is simillar with `'FOOTER' => []`
+  3. `Generate::$assetsReConfig = false;` is used to give choice, wanna combine assets from `src/Config/Assets.php` with these config or just use these config (without using assets from `Assets.php`).
 
-You can also do this
+Note : Number 1 and 2 has same template with `src/Config/Assets.php` so just try to experiment with it.
 
-    return Generate::body(['class' => 'login'])->default('your_view_name');
+### Extra Use Case
+Here I give an extra use case.
 
-### reConfig or add new config Assets.php
-Header and Footer Assets
-Please look Config/Assets.php
-
-    Generate::$assetsHeader = [];
-    Generate::$assetsFooter = [];
-
-Want to reConfig? Just set to true, default is false
-
-    Generate::$assetsReConfig = false;
-
-Example use case
-  
-    Generate::$assetsHeader =
+	Generate::$assetsHeader =
     [
         'directed_css' => '.login {bg-color: dark}'
     ];
     return Generate::body(['class' => 'login'])->default('your_view_name');
 
-it will add login directed css without reConfig
+    //--------------------------------------------------------
 
-tips : `Generate::$asset = 'stisla';` will use stisla instead, without using `initialize()` function
+    return Generate::html(['title' => 'New Title'])->combine('view_1::view_2::view_3');
+
+    //--------------------------------------------------------
+
+    return Generate::meta(['description' => 'New Description in Meta'])->body(['id' => 'app'])->default('your_view_name');
+
+Then you can try a lot with this library :)
 
 ### Hold up!
 The default assets is using https://github.com/astoart/ui repository. This generator include pre-load screen.
-
-#### Note
-BHP.php is your html basic configuration, like meta, title and etc. and Assets.php is your assets configuration.
 
 #### Raw | Elapsed time can be different :)
     <!DOCTYPE html>
