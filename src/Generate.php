@@ -2,7 +2,9 @@
 
 namespace BHPGenerator;
 
-use BHPGenerator\Core\View as BHPView;
+use BHPGenerator\Core\View;
+use BHPGenerator\Core\Header;
+use BHPGenerator\Core\Footer;
 
 class Generate
 {
@@ -18,7 +20,7 @@ class Generate
 	 */
 	public static function default(string $name = '', array $data = [], array $optional = [])
 	{
-		return BHPView::default($name, $data, $optional);
+		return Header::generate() . View::default($name, $data, $optional) . Footer::generate();
 	}
 
 	/**
@@ -32,6 +34,6 @@ class Generate
 	 */
 	public static function parser(string $name = '', array $data = [], array $optional = [])
 	{
-		return BHPView::parser($name, $data, $optional);
+		return Header::generate() . View::parser($name, $data, $optional) . Footer::generate();
 	}
 }

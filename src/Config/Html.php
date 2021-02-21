@@ -66,7 +66,7 @@ class Html extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $title = 'Your Website Title'
+	public $title = 'Your Website Title';
 
 	/**
 	 * --------------------------------------------------------------------------

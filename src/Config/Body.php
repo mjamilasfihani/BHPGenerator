@@ -42,37 +42,11 @@ class Body extends BaseConfig
 
 	/**
 	 * --------------------------------------------------------------------------
-	 * PreLoad Page Image Loading
-	 * --------------------------------------------------------------------------
-	 *
-	 * If you have your own loading image, set this value. Otherwise leave it
-	 * empty for the default image.
-	 *
-	 * NOTE : Your image width and lenght must be 120px
-	 *
-	 * @var string
-	 */
-	public $preloadImageLoading = '';
-
-	/**
-	 * --------------------------------------------------------------------------
-	 * PreLoad Page Text Title
-	 * --------------------------------------------------------------------------
-	 *
-	 * Preload screen text title, leave it blank it will use the default variable,
-	 * the default is 'Please Wait'.
-	 *
-	 * @var string
-	 */
-	public $preloadText = '';
-
-	/**
-	 * --------------------------------------------------------------------------
 	 * Cookie Banner
 	 * --------------------------------------------------------------------------
 	 *
 	 * If you need a cookie banner, feel free to set a value at here.
-	 * BHPGenerator's cookie banner is using Cookie-Script.Com 
+	 * BHPGenerator's cookie banner is using Cookie-Script.Com (suggestion).
 	 *
 	 * Parameter is https://cdn.cookie-script.com/s/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.js
 	 * or just copy your js url and paste in here (because Cookie-Script has GEO features).
@@ -81,6 +55,6 @@ class Body extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $cookieBannerURI = '';
+	public $cookieBannerURI = 'https://cdn.cookie-script.com/s/ccf9174af16192afee99b48079f2cd6c.js';
 
 }
