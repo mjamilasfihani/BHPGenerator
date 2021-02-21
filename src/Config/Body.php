@@ -55,6 +55,6 @@ class Body extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $cookieBannerURI = 'https://cdn.cookie-script.com/s/ccf9174af16192afee99b48079f2cd6c.js';
+	public $cookieBannerURI = '';
 
 }
