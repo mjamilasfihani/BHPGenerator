@@ -1,4 +1,4 @@
-# BHPGenerator v2.8
+# BHPGenerator v2.8 - Please use V3 (under development)
 Bootstrap 4 template generator for CodeIgniter 4 (minimum v4.0.4).
 
 ![GitHub](https://img.shields.io/github/license/mjamilasfihani/BHPGenerator) ![GitHub all releases](https://img.shields.io/github/downloads/mjamilasfihani/BHPGenerator/total)
