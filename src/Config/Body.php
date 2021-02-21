@@ -9,10 +9,10 @@ class Body extends BaseConfig
 
 	/**
 	 * --------------------------------------------------------------------------
-	 * Tag Body Attributes
+	 * Body Attributes
 	 * --------------------------------------------------------------------------
 	 *
-	 * If you have some body attributes, you can add your config here.
+	 * If you have some tag body attributes, you can add it here.
 	 *
 	 * Prototype
 	 *
@@ -21,46 +21,58 @@ class Body extends BaseConfig
 	 *		  'id'    => 'welcome'
 	 *   ];
 	 *
+	 * It will be
+	 *
+	 *   <body class="landing-page" id="welcome">
+	 *
 	 * @var array
 	 */
 	public $attributes = [];
 
 	/**
 	 * --------------------------------------------------------------------------
-	 * Content Delivery Netowrk
-	 * --------------------------------------------------------------------------
-	 *
-	 * All the assets is using CDN to load it, here I give the option :
-	 *
-	 *  - statically (default)
-	 *  - jsdelivr
-	 *
-	 * This config only load the uri, so you must complete the parameter.
-	 * EX : if you use statically, than BHPGenerator will load
-	 * https://cdn.staticall.io/ so you must complete the asset based on
-	 * your assets place.
-	 *
-	 * @var string
-	 */
-	public $cdn = 'statically';
-
-	/**
-	 * --------------------------------------------------------------------------
 	 * PreLoad Page
 	 * --------------------------------------------------------------------------
 	 *
+	 * If you dont want use preloader screen, set to false. The default is true
+	 *
+	 * @var bool
 	 */
 	public $preload = true;
-	public $preloadIMG = '';
-	public $preloadTEXT = '';
 
 	/**
 	 * --------------------------------------------------------------------------
-	 * Cookie Powered by Cookie-Script.Com
+	 * PreLoad Page Image Loading
 	 * --------------------------------------------------------------------------
 	 *
-	 * If you need cookie banner than feel free to set a value at here.
-	 * Remember that this config is different usecase from CI version.
+	 * If you have your own loading image, set this value. Otherwise leave it
+	 * empty for the default image.
+	 *
+	 * NOTE : Your image width and lenght must be 120px
+	 *
+	 * @var string
+	 */
+	public $preloadImageLoading = '';
+
+	/**
+	 * --------------------------------------------------------------------------
+	 * PreLoad Page Text Title
+	 * --------------------------------------------------------------------------
+	 *
+	 * Preload screen text title, leave it blank it will use the default variable,
+	 * the default is 'Please Wait'.
+	 *
+	 * @var string
+	 */
+	public $preloadText = '';
+
+	/**
+	 * --------------------------------------------------------------------------
+	 * Cookie Banner
+	 * --------------------------------------------------------------------------
+	 *
+	 * If you need a cookie banner, feel free to set a value at here.
+	 * BHPGenerator's cookie banner is using Cookie-Script.Com 
 	 *
 	 * Parameter is https://cdn.cookie-script.com/s/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.js
 	 * or just copy your js url and paste in here (because Cookie-Script has GEO features).
@@ -69,6 +81,6 @@ class Body extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $cookie = '';
+	public $cookieBannerURI = '';
 
 }

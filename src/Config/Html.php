@@ -32,11 +32,12 @@ class Html extends BaseConfig
 	 * set used in the page. - W3SCHOOLS.COM
 	 *
 	 * In modern browser or HTML5 the default charset is UTF-8, if you have
-	 * another option it's up to you.
+	 * another option it's up to you. Leave it blank it will use charset from
+	 * App.php
 	 *
 	 * @var string
 	 */
-	public $charset = 'UTF-8';
+	public $charset = '';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -47,11 +48,12 @@ class Html extends BaseConfig
 	 * to declare the language of the Web page. This is meant to assist
 	 * search engines and browsers. - W3SCHOOLS.COM
 	 *
-	 * You could set this variable as you want. But the default one is 'en'.
+	 * You could set this variable as you want. Leave it blank it will use
+	 * defaultLocale from App.php
 	 *
 	 * @var string
 	 */
-	public $language = 'en';
+	public $language = '';
 
 	/**
 	 * --------------------------------------------------------------------------

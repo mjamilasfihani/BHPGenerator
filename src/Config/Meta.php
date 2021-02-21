@@ -57,11 +57,12 @@ class Meta extends BaseConfig
 	 * Custom Meta - name Attribute
 	 * --------------------------------------------------------------------------
 	 *
-	 * If you have your own array put it here. There is 3 types of meta : name,
+	 * If you have your own meta put it here. There is 3 types attribute of meta : name,
 	 * http-equiv and property.
 	 *
-	 * See the list at https://gist.github.com/lancejpollard/1978404
+	 * This config will generate <meta name="name" content="..." />
 	 *
+	 * @see https://gist.github.com/lancejpollard/1978404
 	 * @var array
 	 */
 	public $attributeName = [];
