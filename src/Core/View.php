@@ -5,6 +5,7 @@ namespace BHPGenerator\Core;
 class View
 {
 
+    // Creating default view
     public static function default(string $name = '', array $data = [], array $optional = [])
     {
         $view = '';
@@ -22,6 +23,7 @@ class View
         return empty($view) ? view($name, $data, $optional) : $view;
     }
 
+    // Creating parser view
 	public static function parser(string $name = '', array $data = [], array $optional = [])
     {
     	$parser = single_service('parser');
