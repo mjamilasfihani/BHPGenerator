@@ -2,24 +2,36 @@
 
 namespace BHPGenerator\Core;
 
+use BHPGenerator\Generate;
+
 class Footer
 {
 	
-	public static function generate(string $assetName = 'default')
+	public static function generate(string $asset = 'default')
 	{
 		// Initialize
-		$assets = config('\BHPGenerator\Config\Assets')->$assetName['FOOTER'];
+		if (Generate::$css_js['replace'])
+		{
+			$assets = Generate::$css_js;
+		}
+		else
+		{
+			$assets = array_merge(config('\BHPGenerator\Config\Assets')->$asset, Generate::$css_js);
+		}
+		
 		$body   = config('\BHPGenerator\Config\Body');
 
 		//--------------------------------------------------------------------
 		// Initialize | External JS.
 		//--------------------------------------------------------------------
 
-		if (! empty($assets['external_js']))
+		$str = '';
+
+		if (! empty($assets['FOOTER::external_js']))
 		{
-			for ($i=0; $i < count($assets['external_js']); $i++)
+			for ($i=0; $i < count($assets['FOOTER::external_js']); $i++)
 			{
-				$str .= script_tag($assets['external_js'][$i]);
+				$str .= script_tag($assets['FOOTER::external_js'][$i]);
 			}
 		}
 
@@ -27,9 +39,9 @@ class Footer
 		// Initialize | Directed JS.
 		//--------------------------------------------------------------------
 
-		if (! empty($assets['directed_js']))
+		if (! empty($assets['FOOTER::directed_js']))
 		{
-			$str .= '<script type="text/javascript">'.$assets['directed_js'].'</script>';
+			$str .= '<script type="text/javascript">'.$assets['FOOTER::directed_js'].'</script>';
 		}
 
 		//--------------------------------------------------------------------

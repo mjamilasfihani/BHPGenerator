@@ -7,79 +7,57 @@ use CodeIgniter\Config\BaseConfig;
 class Assets extends BaseConfig
 {
 
-    /**
-     * Default Assets
-     *
-     */
+    // Default
     public $default =
     [
-        'HEADER' =>
+        'HEADER::external_css' =>
         [
-            'external_css' =>
-            [
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/css/bootstrap.css',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/fonts/google.css',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/fontawesome/css/all.css',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/shards/css/shards.css'
-            ],
-            'directed_css' => '',
-
-            'external_js' => 
-            [
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/js/jquery.js',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/js/popper.js',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/js/bootstrap.js'
-            ],
-            'directed_js' => ''
+            'https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.css',
+            'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.css',
         ],
-        'FOOTER' =>
+        'HEADER::directed_css' => '',
+
+        'HEADER::external_js' => [],
+        'HEADER::directed_js' => '',
+
+        'FOOTER::external_js' =>
         [
-            'external_js' =>
-            [
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/fontawesome/js/all.js',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/shards/js/shards.js'
-            ],
-            'directed_js' => ''
-        ]
+            'https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.js',
+            'https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/popper.js',
+            'https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.js'
+        ],
+        'FOOTER::directed_js' => ''
     ];
 
-    /**
-     * Stisla Assets
-     *
-     */
+    // Stisla
     public $stisla =
     [
-        'HEADER' =>
+        'HEADER::external_css' =>
         [
-            'external_css' =>
-            [
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/css/bootstrap.css',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/vendor/fontawesome/css/all.css',
-                'https://cdn.jsdelivr.net/npm/stisla@2.3.0/assets/css/style.css',
-                'https://cdn.jsdelivr.net/npm/stisla@2.3.0/assets/css/components.css',
-            ],
-            'directed_css' => '',
-
-            'external_js' =>
-            [
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/js/jquery.js',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/js/popper.js',
-                'https://cdn.jsdelivr.net/gh/astoart/ui/v2/core/js/bootstrap.js'
-            ],
-            'directed_js' => ''
+            'https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.css',
+            'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.css',
+            'https://cdn.jsdelivr.net/npm/stisla@2.3.0/assets/css/style.css',
+            'https://cdn.jsdelivr.net/npm/stisla@2.3.0/assets/css/components.css',
         ],
-        'FOOTER' =>
+        'HEADER::directed_css' => '',
+
+        'HEADER::external_js' =>
         [
-            'external_js' =>
-            [
-                'https://cdn.jsdelivr.net/npm/jquery.nicescroll@3.7.6/dist/jquery.nicescroll.js',
-                'https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.js',
-                'https://cdn.jsdelivr.net/npm/stisla@2.3.0/assets/js/stisla.js',
-                'https://cdn.jsdelivr.net/npm/stisla@2.3.0/assets/js/scripts.js',
-                'https://cdn.jsdelivr.net/npm/stisla@2.3.0/assets/js/custom.js'
-            ],
-            'directed_js' => ''
-        ]
+            'https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.js',
+            'https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/popper.js',
+            'https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.js'
+        ],
+        'HEADER::directed_js' => '',
+
+        'FOOTER::external_js' =>
+        [
+            'https://cdn.jsdelivr.net/npm/jquery.nicescroll@3.7.6/dist/jquery.nicescroll.js',
+            'https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.js',
+            'https://cdn.jsdelivr.net/npm/stisla@2.3.0/assets/js/stisla.js',
+            'https://cdn.jsdelivr.net/npm/stisla@2.3.0/assets/js/scripts.js',
+            'https://cdn.jsdelivr.net/npm/stisla@2.3.0/assets/js/custom.js'
+        ],
+        'FOOTER::directed_js' => ''
     ];
 
 }

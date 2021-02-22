@@ -2,13 +2,23 @@
 
 namespace BHPGenerator\Core;
 
+use BHPGenerator\Generate;
+
 class Header
 {
 	
-	public static function generate(string $assetName = 'default')
+	public static function generate(string $asset = 'default', array $html_ = [], array $body_ = [], array $meta_ = [])
 	{
 		// Initialize
-		$assets = config('\BHPGenerator\Config\Assets')->$assetName['HEADER'];
+		if (Generate::$css_js['replace'])
+		{
+			$assets = Generate::$css_js;
+		}
+		else
+		{
+			$assets = array_merge(config('\BHPGenerator\Config\Assets')->$asset, Generate::$css_js);
+		}
+
 		$body   = config('\BHPGenerator\Config\Body');
 		$html   = config('\BHPGenerator\Config\Html');
 		$meta   = config('\BHPGenerator\Config\Meta');
@@ -23,7 +33,7 @@ class Header
 		// Open | Html tag.
 		//--------------------------------------------------------------------
 
-		$str .= '<html lang="'.(empty($html->language) ? config('App')->defaultLocale : $html->language).'">';
+		$str .= '<html lang="'.($html_['language'] ?? (empty($html->language) ? config('App')->defaultLocale : $html->language)).'">';
 
 		//--------------------------------------------------------------------
 		// Open | Head tag.
@@ -41,11 +51,13 @@ class Header
 		// Initialize | Meta tag.
 		//--------------------------------------------------------------------
 
+		$meta_ = array_merge($meta_, ['keywords' => implode(', ', $meta_['keywords'])]);
+
 		$attr = array_merge([
-			'description' => $meta->description,
-			'keywords'    => implode(', ', $meta->keywords),
-			'author'      => $meta->author,
-			'viewport'    => $meta->viewport], $meta->attributeName);
+			'description' => $meta_['description'] ?? $meta->description,
+			'keywords'    => $meta_['keywords']    ?? implode(', ', $meta->keywords),
+			'author'      => $meta_['author']      ?? $meta->author,
+			'viewport'    => $meta_['viewport']    ?? $meta->viewport], $meta->attributeName, $meta_);
 
 		if (! empty($attr))
 		{
@@ -88,11 +100,11 @@ class Header
 		// Initialize | External CSS.
 		//--------------------------------------------------------------------
 
-		if (! empty($assets['external_css']))
+		if (! empty($assets['HEADER::external_css']))
 		{
-			for ($i=0; $i <count($assets['external_css']); $i++)
+			for ($i=0; $i <count($assets['HEADER::external_css']); $i++)
 			{
-				$str .= link_tag($assets['external_css'][$i]);
+				$str .= link_tag($assets['HEADER::external_css'][$i]);
 			}
 		}
 
@@ -100,20 +112,20 @@ class Header
 		// Initialize | Directed CSS.
 		//--------------------------------------------------------------------
 
-		if (! empty($assets['directed_css']))
+		if (! empty($assets['HEADER::directed_css']))
 		{
-			$str .= '<style type="text/css">'.$assets['directed_css'].'</style>';
+			$str .= '<style type="text/css">'.$assets['HEADER::directed_css'].'</style>';
 		}
 
 		//--------------------------------------------------------------------
 		// Initialize | External JS.
 		//--------------------------------------------------------------------
 
-		if (! empty($assets['external_js']))
+		if (! empty($assets['HEADER::external_js']))
 		{
-			for ($i=0; $i < count($assets['external_js']) ; $i++)
+			for ($i=0; $i < count($assets['HEADER::external_js']) ; $i++)
 			{
-				$str .= script_tag($assets['external_js'][$i]);
+				$str .= script_tag($assets['HEADER::external_js'][$i]);
 			}
 		}
 
@@ -121,9 +133,9 @@ class Header
 		// Initialize | Directed JS.
 		//--------------------------------------------------------------------
 
-		if (! empty($assets['directed_js']))
+		if (! empty($assets['HEADER::directed_js']))
 		{
-			$str .= '<script type="text/javascript">'.$assets['directed_js'].'</script>';
+			$str .= '<script type="text/javascript">'.$assets['HEADER::directed_js'].'</script>';
 		}
 
 		//--------------------------------------------------------------------
@@ -140,7 +152,7 @@ class Header
 		// Initialize | Title tag.
 		//--------------------------------------------------------------------
 
-		$str .= '<title>'.$html->title.'</title>';
+		$str .= '<title>'.($html_['title'] ?? $html->title).'</title>';
 
 		//--------------------------------------------------------------------
 		// Close | Head tag.
@@ -152,7 +164,7 @@ class Header
 		// Initialize | Body attr
 		//--------------------------------------------------------------------
 
-		$str .= '<body'.stringify_attributes($body->attributes).'>';
+		$str .= '<body'.stringify_attributes(array_merge($body->attributes, $body_)).'>';
 
 		//--------------------------------------------------------------------
 		// Everything is done, now load content.
@@ -166,32 +178,21 @@ class Header
 		return $str;
 	}
 
-	public static function meta(string $name = '', string $content = '', string $type = 'name')
+	// I took the meta helper in CI 3 with my own modification.
+	protected static function meta(string $name = '', string $content = '', string $type = 'name')
 	{
-		// Since we allow the data to be passes as a string, a simple array
-		// or a multidimensional one, we need to do a little prepping.
-		if ( ! is_array($name))
-		{
-			$name = [['name' => $name, 'content' => $content, 'type' => $type]];
-		}
-		elseif (isset($name['name']))
-		{
-			// Turn single array into multidimensional
-			$name = [$name];
-		}
-
-		$string = '';
+		$str = '';
 						
-		foreach ($name as $meta)
+		foreach ([['name' => $name, 'content' => $content, 'type' => $type]] as $val)
 		{
-			$type	 = isset($meta['type'])    ? $meta['type'] 	  : '';
-			$name	 = isset($meta['name'])	   ? $meta['name']    : '';
-			$content = isset($meta['content']) ? $meta['content'] : '';
+			$type	 = empty($val['type'])    ? '' : $val['type'];
+			$name	 = empty($val['name'])    ? '' : $val['name'];
+			$content = empty($val['content']) ? '' : $val['content'];
 
-			$string .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />';
+			$str .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />';
 		}
 
-		return $string;
+		return $str;
 	}
 	
 }
