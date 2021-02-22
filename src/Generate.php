@@ -36,4 +36,5 @@ class Generate
 	{
 		return Header::generate() . View::parser($name, $data, $optional) . Footer::generate();
 	}
+
 }
