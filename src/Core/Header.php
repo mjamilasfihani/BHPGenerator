@@ -10,7 +10,7 @@ class Header
 	public static function generate(string $asset = 'default', array $html_ = [], array $body_ = [], array $meta_ = [])
 	{
 		// Initialize
-		if (Generate::$css_js['replace'])
+		if (isset(Generate::$css_js['replace']))
 		{
 			$assets = Generate::$css_js;
 		}

@@ -59,8 +59,6 @@ class Generate
 		self::$html  = $html;
 		self::$body  = $body;
 		self::$meta  = $meta;
-
-		self::$css_js = array_merge(self::$css_js, ['replace' => false]);
 	}
 
 	/**
