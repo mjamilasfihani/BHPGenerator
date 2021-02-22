@@ -51,7 +51,7 @@ class Header
 		// Initialize | Meta tag.
 		//--------------------------------------------------------------------
 
-		$meta_ = array_merge($meta_, ['keywords' => implode(', ', $meta_['keywords'])]);
+		$meta_ = array_merge($meta_, ['keywords' => implode(', ', $meta_['keywords'] ?? [])]);
 
 		$attr = array_merge([
 			'description' => $meta_['description'] ?? $meta->description,
