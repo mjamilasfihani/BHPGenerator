@@ -5,24 +5,32 @@ namespace BHPGenerator\Core;
 class Footer
 {
 	
-	public static function generate()
+	public static function generate(string $assetName = 'default')
 	{
 		// Initialize
-		$body = config('\BHPGenerator\Config\Body');
-
-		//--------------------------------------------------------------------
-		// End of docuemnt
-		//--------------------------------------------------------------------
-
-		$view = PHP_EOL.PHP_EOL;
+		$assets = config('\BHPGenerator\Config\Assets')->$assetName['FOOTER'];
+		$body   = config('\BHPGenerator\Config\Body');
 
 		//--------------------------------------------------------------------
 		// Initialize | External JS.
 		//--------------------------------------------------------------------
 
+		if (! empty($assets['external_js']))
+		{
+			for ($i=0; $i < count($assets['external_js']); $i++)
+			{
+				$str .= script_tag($assets['external_js'][$i]);
+			}
+		}
+
 		//--------------------------------------------------------------------
 		// Initialize | Directed JS.
 		//--------------------------------------------------------------------
+
+		if (! empty($assets['directed_js']))
+		{
+			$str .= '<script type="text/javascript">'.$assets['directed_js'].'</script>';
+		}
 
 		//--------------------------------------------------------------------
 		// Initialize | Cookie JS.
@@ -30,8 +38,7 @@ class Footer
 
 		if (empty($body->cookieBannerURI) === false)
 		{
-			$view .= str_pad(' ', 2).'<!-- Load Cookie JS -->'.PHP_EOL;
-			$view .= str_pad(' ', 2).'<script type="text/javascript" src="'.$body->cookieBannerURI.'"></script>'.PHP_EOL.PHP_EOL;
+			$str .= '<script type="text/javascript" src="'.$body->cookieBannerURI.'"></script>';
 		}
 
 		//--------------------------------------------------------------------
@@ -40,23 +47,22 @@ class Footer
 
 		if ($body->preload)
 		{
-			$view .= str_pad(' ', 2).'<!-- Pre-Load Screen JS -->'.PHP_EOL;
-			$view .= str_pad(' ', 2).'<script type="text/javascript">ldld.off()</script>'.PHP_EOL.PHP_EOL;
+			$str .= '<script type="text/javascript">ldld.off()</script>';
 		}
 
 		//--------------------------------------------------------------------
 		// Close | Body tag.
 		//--------------------------------------------------------------------
 
-		$view .= str_pad(' ', 1).'</body>'.PHP_EOL;
+		$str .= '</body>';
 
 		//--------------------------------------------------------------------
 		// Close | Html tag.
 		//--------------------------------------------------------------------
 		
-		$view .= '</html>';
+		$str .= '</html>';
 
-		return $view;
+		return $str;
 	}
 	
 }

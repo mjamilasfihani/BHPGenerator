@@ -5,90 +5,61 @@ namespace BHPGenerator\Core;
 class Header
 {
 	
-	public static function generate()
+	public static function generate(string $assetName = 'default')
 	{
-		// Meta function from CodeIgniter 3
-		function meta(string $name = '', string $content = '', string $type = 'name', string $newline = PHP_EOL)
-		{
-			// Since we allow the data to be passes as a string, a simple array
-			// or a multidimensional one, we need to do a little prepping.
-			if ( ! is_array($name))
-			{
-				$name = [['name' => $name, 'content' => $content, 'type' => $type, 'newline' => $newline]];
-			}
-			elseif (isset($name['name']))
-			{
-				// Turn single array into multidimensional
-				$name = [$name];
-			}
-
-			$str = '';
-						
-			foreach ($name as $meta)
-			{
-				$type	 = (isset($meta['type']) && $meta['type'] !== 'name') ? $meta['type'] 	 : 'name';
-				$name	 = isset($meta['name'])								  ? $meta['name']    : '';
-				$content = isset($meta['content'])							  ? $meta['content'] : '';
-				$newline = isset($meta['newline'])							  ? $meta['newline'] : PHP_EOL;
-
-				$str .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />'.$newline;
-			}
-
-			return $str;
-		}
-
 		// Initialize
-		$body = config('\BHPGenerator\Config\Body');
-		$html = config('\BHPGenerator\Config\Html');
-		$meta = config('\BHPGenerator\Config\Meta');
+		$assets = config('\BHPGenerator\Config\Assets')->$assetName['HEADER'];
+		$body   = config('\BHPGenerator\Config\Body');
+		$html   = config('\BHPGenerator\Config\Html');
+		$meta   = config('\BHPGenerator\Config\Meta');
 
 		//--------------------------------------------------------------------
 		// Initialize | Doctype tag.
 		//--------------------------------------------------------------------
 
-		$view = doctype($html->doctype).PHP_EOL;
+		$str = doctype($html->doctype);
 
 		//--------------------------------------------------------------------
 		// Open | Html tag.
 		//--------------------------------------------------------------------
 
-		$view .= '<html lang="'.(empty($html->language) ? config('App')->defaultLocale : $html->language).'">'.PHP_EOL;
+		$str .= '<html lang="'.(empty($html->language) ? config('App')->defaultLocale : $html->language).'">';
 
 		//--------------------------------------------------------------------
 		// Open | Head tag.
 		//--------------------------------------------------------------------
 
-		$view .= str_pad(' ', 1).'<head>'.PHP_EOL.PHP_EOL;
+		$str .= '<head>';
 
 		//--------------------------------------------------------------------
 		// Initialize | Meta Charset tag.
 		//--------------------------------------------------------------------
 
-		$view .= str_pad(' ', 2).'<!-- Charset ' .(empty($html->charset) ? config('App')->charset : $html->charset). ' -->'.PHP_EOL;
-		$view .= str_pad(' ', 2).'<meta charset="' .(empty($html->charset) ? config('App')->charset : $html->charset). '">'.PHP_EOL.PHP_EOL;
+		$str .= '<meta charset="' .(empty($html->charset) ? config('App')->charset : $html->charset). '">';
 
 		//--------------------------------------------------------------------
 		// Initialize | Meta tag.
 		//--------------------------------------------------------------------
 
-		$view .= str_pad(' ', 2).'<!-- Meta tags -->'.PHP_EOL;
-
-		$attr = array_merge(['description' => $meta->description, 'keywords' => implode(', ', $meta->keywords), 'author' => $meta->author, 'viewport' => $meta->viewport], $meta->attributeName);
+		$attr = array_merge([
+			'description' => $meta->description,
+			'keywords'    => implode(', ', $meta->keywords),
+			'author'      => $meta->author,
+			'viewport'    => $meta->viewport], $meta->attributeName);
 
 		if (! empty($attr))
 		{
 			foreach ($attr as $name => $value)
 			{
-				$view .= str_pad(' ', 2).meta($name, $value);
+				$str .= self::meta($name, $value);
 			}
 		}
-
 		
 		if (! empty($meta->attributeHttpEquiv))
 		{
 			foreach ($meta->attributeHttpEquiv as $name => $value)
 			{
-				$view .= str_pad(' ', 2).meta($name, $value, 'http-equiv');
+				$str .= self::meta($name, $value, 'http-equiv');
 			}
 		}
 
@@ -96,11 +67,9 @@ class Header
 		{
 			foreach ($meta->attributeProperty as $name => $value)
 			{
-				$view .= str_pad(' ', 2).meta($name, $value, 'property');
+				$str .= self::meta($name, $value, 'property');
 			}
 		}
-
-		$view .= PHP_EOL;
 
 		//--------------------------------------------------------------------
 		// Initialize | Favicon.
@@ -108,30 +77,54 @@ class Header
 
 		if (empty($html->favicon))
 		{
-			$view .= str_pad(' ', 2).'<!-- Favicon.ico -->'.PHP_EOL;
-			$view .= str_pad(' ', 2).link_tag(base_url('favicon.ico'), 'icon', 'image/ico').PHP_EOL.PHP_EOL;
+			$str .= link_tag(base_url('favicon.ico'), 'icon', 'image/ico');
 		}
 		else
 		{
-			$view .= str_pad(' ', 2).'<!-- Favicon.ico -->'.PHP_EOL;
-			$view .= str_pad(' ', 2).link_tag($html->favicon, 'icon', mime_content_type($html->favicon)).PHP_EOL.PHP_EOL;
+			$str .= link_tag($html->favicon, 'icon', mime_content_type($html->favicon));
 		}
 
 		//--------------------------------------------------------------------
 		// Initialize | External CSS.
 		//--------------------------------------------------------------------
 
+		if (! empty($assets['external_css']))
+		{
+			for ($i=0; $i <count($assets['external_css']); $i++)
+			{
+				$str .= link_tag($assets['external_css'][$i]);
+			}
+		}
+
 		//--------------------------------------------------------------------
 		// Initialize | Directed CSS.
 		//--------------------------------------------------------------------
+
+		if (! empty($assets['directed_css']))
+		{
+			$str .= '<style type="text/css">'.$assets['directed_css'].'</style>';
+		}
 
 		//--------------------------------------------------------------------
 		// Initialize | External JS.
 		//--------------------------------------------------------------------
 
+		if (! empty($assets['external_js']))
+		{
+			for ($i=0; $i < count($assets['external_js']) ; $i++)
+			{
+				$str .= script_tag($assets['external_js'][$i]);
+			}
+		}
+
 		//--------------------------------------------------------------------
 		// Initialize | Directed JS.
 		//--------------------------------------------------------------------
+
+		if (! empty($assets['directed_js']))
+		{
+			$str .= '<script type="text/javascript">'.$assets['directed_js'].'</script>';
+		}
 
 		//--------------------------------------------------------------------
 		// Initialize Pre-Load CSS.
@@ -139,29 +132,27 @@ class Header
 
 		if ($body->preload)
 		{
-			$view .= str_pad(' ', 2).'<!-- Loading.Io CSS and JS -->'.PHP_EOL;
-			$view .= str_pad(' ', 2).link_tag('https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.css').PHP_EOL;
-			$view .= str_pad(' ', 2).script_tag('https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js').PHP_EOL.PHP_EOL;
+			$str .= link_tag('https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.css');
+			$str .= script_tag('https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js');
 		}
 
 		//--------------------------------------------------------------------
 		// Initialize | Title tag.
 		//--------------------------------------------------------------------
 
-		$view .= str_pad(' ', 2).'<!-- Title -->'.PHP_EOL;
-		$view .= str_pad(' ', 2).'<title>'.$html->title.'</title>'.PHP_EOL.PHP_EOL;
+		$str .= '<title>'.$html->title.'</title>';
 
 		//--------------------------------------------------------------------
 		// Close | Head tag.
 		//--------------------------------------------------------------------
 
-		$view .= str_pad(' ', 1).'</head>'.PHP_EOL;
+		$str .= '</head>';
 
 		//--------------------------------------------------------------------
 		// Initialize | Body attr
 		//--------------------------------------------------------------------
 
-		$view .= str_pad(' ', 1).'<body'.stringify_attributes($body->attributes).'>'.PHP_EOL.PHP_EOL;
+		$str .= '<body'.stringify_attributes($body->attributes).'>';
 
 		//--------------------------------------------------------------------
 		// Everything is done, now load content.
@@ -169,12 +160,38 @@ class Header
 		
 		if ($body->preload)
 		{
-			$view .= str_pad(' ', 2).'<!-- Pre-Load Screen START -->'.PHP_EOL;
-			$view .= str_pad(' ', 2).'<div id="loader" class="ldld full"></div><script type="text/javascript">var ldld = new ldLoader({ root: "#loader" }); ldld.on();</script>'.PHP_EOL;
-			$view .= str_pad(' ', 2).'<!-- Pre-Load Screen END -->'.PHP_EOL.PHP_EOL;
+			$str .= '<div id="loader" class="ldld full"></div><script type="text/javascript">var ldld = new ldLoader({ root: "#loader" }); ldld.on();</script>';
 		}
 
-		return $view;
+		return $str;
+	}
+
+	public static function meta(string $name = '', string $content = '', string $type = 'name')
+	{
+		// Since we allow the data to be passes as a string, a simple array
+		// or a multidimensional one, we need to do a little prepping.
+		if ( ! is_array($name))
+		{
+			$name = [['name' => $name, 'content' => $content, 'type' => $type]];
+		}
+		elseif (isset($name['name']))
+		{
+			// Turn single array into multidimensional
+			$name = [$name];
+		}
+
+		$string = '';
+						
+		foreach ($name as $meta)
+		{
+			$type	 = isset($meta['type'])    ? $meta['type'] 	  : '';
+			$name	 = isset($meta['name'])	   ? $meta['name']    : '';
+			$content = isset($meta['content']) ? $meta['content'] : '';
+
+			$string .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />';
+		}
+
+		return $string;
 	}
 	
 }
