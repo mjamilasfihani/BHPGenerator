@@ -179,4 +179,18 @@ class Generate
 		return self::__('parser', $name, $data, $optional);
 	}
 
+	/**
+	 * --------------------------------------------------------------------------
+	 * Blade
+	 * --------------------------------------------------------------------------
+	 *
+	 * This static function is handle blade version of view.
+	 *
+	 * @var string, array
+	 */
+	public static function blade(string $name = '', array $data = [])
+	{
+		return self::__('blade', $name, $data);
+	}
+
 }

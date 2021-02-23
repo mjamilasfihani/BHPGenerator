@@ -66,6 +66,6 @@ Here I give an extra use case.
 
     return Generate::meta(['description' => 'New Description in Meta'])->body(['id' => 'app'])->default('your_view_name');
 
-Note : change default with `parser('your_view_name')` will use parser feature (basic) in CI 4 and has simillar param with the default.
+Note : change default with `parser('your_view_name')` will use parser feature (basic) in CI 4 and has simillar param with the default. You can also use `blade('your_view_name')` if you want to use blade version.
 
-Then you can try a lot with this library :)
+Blade library by https://github.com/EFTEC/BladeOne | Default assets by https://getbootstrap.com/
