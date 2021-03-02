@@ -143,12 +143,9 @@ class Generate
 	 */
 	protected static function __(string $view = '', string $name = '', array $data = [], array $optional = [])
 	{
-		$ui  = Header::generate(self::$asset, self::$html, self::$body, self::$meta);
-		$ui .= View::$view($name, $data, $optional);
-		$ui .= Footer::generate(self::$asset);
-
-		return $ui;
-		       
+		return Header::generate(self::$asset, self::$html, self::$body, self::$meta) .
+			   View::$view($name, $data, $optional) .
+			   Footer::generate(self::$asset);		       
 	}
 
 	/**
