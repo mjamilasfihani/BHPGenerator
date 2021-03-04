@@ -1,10 +1,10 @@
 # BHPGenerator v3.0
-Bootstrap 4 template generator for CodeIgniter 4.
+Template engine for CodeIgniter 4 (You can load Bootstrap, Bulma, Stisla or etc here).
 
 ![GitHub](https://img.shields.io/github/license/mjamilasfihani/BHPGenerator) ![GitHub all releases](https://img.shields.io/github/downloads/mjamilasfihani/BHPGenerator/total)
 
 ## Why I made this Library?
-When I made a new view file, I always do include and include the assets file. And I hate when I need to reconfigure everything manually, in case different meta, css, js or title. So that I made this library. (basic)
+When I made a new view file, I always do include and include the assets file. And I hate when I need to reconfig everything manually, in case different meta, css, js or title. So I made this library.
 
 ## Installation
   1. Create folder `bhp-generator` in `app/ThirdParty`.
@@ -19,40 +19,42 @@ When I made a new view file, I always do include and include the assets file. An
   4. If you want to edit the assets, open `src/Config/Assets.php`.
 
 ## Advanced Using
-  1. If you have more than 1 view files, then using `return Generate::default('view_1::view_2', [$data], [$option]);`.
-  2. You can edit html config in `src/Config/Html.php`.
+  1. If you have more than 1 view files, then separate your view using `::`.
+  2. So, your view will be `Generate::view('view_1::view_2::view_3')`
 
-This `initialize(string)` function is used for tell the Generator which assets will be use. In case the default value is `default`, and you can see this 3 use case is same too.
+This `initialize(string)` function is used to tell the Generator which asset will use. In case the default value is `default`, and you can see this 3 use case is same too.
 
-    return Generate::default('your_view_name');
-    return Generate::initialize()->default('your_view_name');
-    return Generate::initialize('default')->default('your_view_name');
+  return Generate::default('your_view_name');
+  return Generate::initialize()->default('your_view_name');
+  return Generate::initialize('default')->default('your_view_name');
 
 Anyway I include <a href="https://getstisla.com" target="_blank">Stisla</a> at this library. And here is the use case.
 
-	return Generate::initialize('stisla')->default('your_view_name');                           // For 1 view
-	return Generate::initialize('stisla')->default('part/header::your_view_name::part/footer'); // For 2 views or more
+  return Generate::initialize('stisla')->default('your_view_name');                           // For 1 view
+  return Generate::initialize('stisla')->default('part/header::your_view_name::part/footer'); // For 2 views or more
+
+Or
+
+  $this->BHP = Generate::initialize('stisla'); // create an BHPGenerator object
+  $this->BHP->default('your_view_name'); // loading view with Stisla asset
 
 ## Builtin Function
 I have created an extra function too.
-  1. `html([])` function is used to re-config `src/Config/Html.php`
-  2. `meta([])` function is used to re / add new config `src/Config/Meta.php` (only for meta with attribute name)
-  3. `body([])` function is used to re / add new config `src/Config/Body.php`
+  1. `html([])` function is used to re-config `src/Config/Html.php` (languange and title).
+  2. `meta([])` function is used to re / add new config `src/Config/Meta.php` (meta with 'name' attribute).
+  3. `body([])` function is used to re / add new config `src/Config/Body.php` (attributes only).
 
-Note : open `src/Config/Meta.php` and `src/Config/Body.php` too for information
-
-## Unwanted Assets?
-You can add spesific assets for spesific controller, and how to do that?
-I have created :
-  1. `Generate::$css_js = [];` has simillar parameter with `src/Config/Assets.php`
-  2. add `'replace' => true` inside the array will use the assets in your controller instead.
-
-Note : Number 1 has same template with `src/Config/Assets.php` so just try to experiment with it.
+## Directly Asset?
+You can add spesific asset for spesific controller, and how to do that?
+Here is the way :
+  1. Add `Generate::$css_js = [];`
+  2. Fill it with your assets (has same layout with `src/Config/Assets.php`).
+  3. If you want to use the asset instead add `'replace' => true` inside it.
 
 ### Extra Use Case
 Here I give an extra use case.
 
-	Generate::$css_js =
+	  Generate::$css_js =
     [
         'HEADER::directed_css' => '.login {bg-color: dark}'
     ];
@@ -68,4 +70,4 @@ Here I give an extra use case.
 
 Note : change default with `parser('your_view_name')` will use parser feature (basic) in CI 4 and has simillar param with the default. You can also use `blade('your_view_name')` if you want to use blade version.
 
-Blade library by https://github.com/EFTEC/BladeOne | Default assets by https://getbootstrap.com/
+Blade library by https://github.com/EFTEC/BladeOne and Default assets by https://getbootstrap.com/
