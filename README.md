@@ -24,24 +24,18 @@ When I made a new view file, I always do include and include the assets file. An
 
 This `initialize(string)` function is used to tell the Generator which asset will use. In case the default value is `default`, and you can see this 3 use case is same too.
 
-`
-return Generate::default('your_view_name');
-return Generate::initialize('default')->default('your_view_name');
-`
+    return Generate::default('your_view_name');
+    return Generate::initialize('default')->default('your_view_name');
 
 Anyway I include <a href="https://getstisla.com" target="_blank">Stisla</a> at this library. And here is the use case.
 
-`
-return Generate::initialize('stisla')->default('your_view_name');                           // For 1 view
-return Generate::initialize('stisla')->default('part/header::your_view_name::part/footer'); // For 2 views or more
-`
+    return Generate::initialize('stisla')->default('your_view_name');                           // For 1 view
+    return Generate::initialize('stisla')->default('part/header::your_view_name::part/footer'); // For 2 views or more
 
 Or
 
-`
-$this->BHP = Generate::initialize('stisla'); // create an BHPGenerator object
-$this->BHP->default('your_view_name'); // loading view with Stisla asset
-`
+    $this->BHP = Generate::initialize('stisla'); // create an BHPGenerator object
+    $this->BHP->default('your_view_name'); // loading view with Stisla asset
 
 ## Builtin Function
 I have created an extra function too.
