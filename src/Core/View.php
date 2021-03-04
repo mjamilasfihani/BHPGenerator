@@ -44,7 +44,28 @@ class View
         return empty($view) ? $parser->setData($data)->render($name, $optional) : $view;
     }
 
+    // Creating parser view (string)
+    public static function parser_string(string $template = '', array $data = [], array $optional = [])
+    {
+        $parser = single_service('parser');
+        $view   = '';
+
+        if (strpos($template, '::'))
+        {
+            $explode = explode('::', $template);
+
+            for ($i=0; $i <= substr_count($template, '::'); $i++)
+            { 
+                $view .= $parser->setData($data)->renderString($explode[$i], $optional);
+            }
+        }
+
+        return empty($view) ? $parser->setData($data)->renderString($template, $optional) : $view;
+    }
+
     // Creating blade view (basic)
+    // The default path is app/Views
+    // Dynamic path will coming soon :)
     public static function blade(string $name = '', array $data = [])
     {
         $blade = new BladeOne(config('Paths')->viewDirectory, config('Cache')->storePath);
