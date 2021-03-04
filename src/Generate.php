@@ -178,6 +178,20 @@ class Generate
 
 	/**
 	 * --------------------------------------------------------------------------
+	 * Parser String
+	 * --------------------------------------------------------------------------
+	 *
+	 * This static function is handle parser 'string' version of view.
+	 *
+	 * @var string, array, array
+	 */
+	public static function parser_string(string $template = '', array $data = [], array $optional = [])
+	{
+		return self::__('parser_string', $template, $data, $optional);
+	}
+
+	/**
+	 * --------------------------------------------------------------------------
 	 * Blade
 	 * --------------------------------------------------------------------------
 	 *
