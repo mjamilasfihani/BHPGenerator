@@ -1,4 +1,4 @@
-# BHPGenerator v3.1-rev1
+# BHPGenerator v3.1
 Template engine for CodeIgniter 4 (You can load Bootstrap, Bulma, Stisla or etc here).
 
 ![GitHub](https://img.shields.io/github/license/mjamilasfihani/BHPGenerator) ![GitHub all releases](https://img.shields.io/github/downloads/mjamilasfihani/BHPGenerator/total)
