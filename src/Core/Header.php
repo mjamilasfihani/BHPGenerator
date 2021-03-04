@@ -45,7 +45,7 @@ class Header
 		// Initialize | Meta Charset tag.
 		//--------------------------------------------------------------------
 
-		$str .= '<meta charset="' .(empty($html->charset) ? config('App')->charset : $html->charset). '">';
+		$str .= '<meta charset="'.(empty($html->charset) ? config('App')->charset : $html->charset).'">';
 
 		//--------------------------------------------------------------------
 		// Initialize | Meta tag.
@@ -102,7 +102,7 @@ class Header
 
 		if (! empty($assets['HEADER::external_css']))
 		{
-			for ($i=0; $i <count($assets['HEADER::external_css']); $i++)
+			for ($i=0; $i < count($assets['HEADER::external_css']); $i++)
 			{
 				$str .= link_tag($assets['HEADER::external_css'][$i]);
 			}
