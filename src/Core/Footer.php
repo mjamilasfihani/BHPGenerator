@@ -19,7 +19,7 @@ class Footer
 			$assets = array_merge(config('\BHPGenerator\Config\Assets')->$asset, Generate::$css_js);
 		}
 		
-		$body   = config('\BHPGenerator\Config\Body');
+		$body = config('\BHPGenerator\Config\Body');
 
 		//--------------------------------------------------------------------
 		// Initialize | External JS.
