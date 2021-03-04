@@ -35,7 +35,7 @@ use InvalidArgumentException;
  * @copyright Copyright (c) 2016-2020 Jorge Patricio Castro Castillo MIT License.
  *            Don't delete this comment, its part of the license.
  *            Part of this code is based in the work of Laravel PHP Components.
- * @version   3.49.1
+ * @version   3.51
  * @link      https://github.com/EFTEC/BladeOne
  */
 class BladeOne
@@ -197,11 +197,22 @@ class BladeOne
     private $switchCount = 0;
     /** @var bool Indicates if the switch is recently open */
     private $firstCaseInSwitch = true;
-
+    /**
+     * @var callable[] It allows to parse the compiled output using a function.
+     * This function doesn't require to return a value<br>
+     * <b>Example:</b> this converts all compiled result in uppercase (note, content is a ref)
+     * <pre>
+     * $this->compileCallbacks[]= static function (&$content, $templatename=null) {
+     *      $content=strtoupper($content);
+     * };
+     * </pre>
+     */
+    public $compileCallbacks=[];
 
     //</editor-fold>
 
     //<editor-fold desc="constructor">
+
 
     /**
      * Bob the constructor.
@@ -239,7 +250,7 @@ class BladeOne
             return false;
         };
 
-        if (!\file_exists($this->compiledPath)) {
+        if (!\is_dir($this->compiledPath)) {
             $ok = @\mkdir($this->compiledPath, 0777, true);
             if ($ok === false) {
                 $this->showError(
@@ -1172,7 +1183,16 @@ class BladeOne
             return false;
         }
     }
-
+    protected function compileCallBacks(&$contents, $templateName)
+    {
+        if (!empty($this->compileCallbacks)) {
+            foreach ($this->compileCallbacks as $callback) {
+                if (is_callable($callback)) {
+                    $callback($contents, $templateName);
+                }
+            }
+        }
+    }
     /**
      * Compile the view at the given path.
      *
@@ -1187,13 +1207,16 @@ class BladeOne
         $compiled = $this->getCompiledFile($templateName);
         $template = $this->getTemplateFile($templateName);
         if (!$this->isCompiled) {
-            return $this->compileString($this->getFile($template));
+            $contents=$this->compileString($this->getFile($template));
+            $this->compileCallBacks($contents, $templateName);
+            return $contents;
         }
         if ($forced || $this->isExpired($templateName)) {
             // compile the original file
             $contents = $this->compileString($this->getFile($template));
+            $this->compileCallBacks($contents, $templateName);
             $dir = \dirname($compiled);
-            if (!\file_exists($dir)) {
+            if (!\is_dir($dir)) {
                 $ok = @\mkdir($dir, 0777, true);
                 if ($ok === false) {
                     $this->showError(
@@ -1298,7 +1321,7 @@ class BladeOne
         $this->notFoundPath = '';
         foreach ($this->templatePath as $dir) {
             $path = $dir . '/' . $name;
-            if (\file_exists($path)) {
+            if (\is_file($path)) {
                 return $path;
             }
 
@@ -1333,7 +1356,7 @@ class BladeOne
     {
         $compiled = $this->getCompiledFile($fileName);
         $template = $this->getTemplateFile($fileName);
-        if (!\file_exists($template)) {
+        if (!\is_file($template)) {
             if ($this->mode == self::MODE_DEBUG) {
                 $this->showError('Read file', 'Template not found :' . $this->fileName . " on file: $template", true);
             } else {
@@ -1343,7 +1366,7 @@ class BladeOne
         // If the compiled file doesn't exist we will indicate that the view is expired
         // so that it can be re-compiled. Else, we will verify the last modification
         // of the views is less than the modification times of the compiled views.
-        if (!$this->compiledPath || !\file_exists($compiled)) {
+        if (!$this->compiledPath || !\is_file($compiled)) {
             return true;
         }
         return \filemtime($compiled) < \filemtime($template);
@@ -1436,7 +1459,7 @@ class BladeOne
     private function templateExist($templateName)
     {
         $file = $this->getTemplateFile($templateName);
-        return \file_exists($file);
+        return \is_file($file);
     }
 
     /**
@@ -2994,12 +3017,10 @@ class BladeOne
             $fnNameF=$fnName[0]; // first character
             if ($fnNameF === '"' || $fnNameF === '\'' || $fnNameF === '$' || is_numeric($fnNameF)) {
                 $fnName='!isset('.$array[0].') ? '.$fnName.' : ';
-            } else {
-                if (isset($this->customDirectives[$fnName])) {
-                    $fnName = '$this->customDirectives[\'' . $fnName . '\']';
-                } elseif (method_exists($this, $fnName)) {
-                    $fnName = '$this->' . $fnName;
-                }
+            } elseif (isset($this->customDirectives[$fnName])) {
+                $fnName = '$this->customDirectives[\'' . $fnName . '\']';
+            } elseif (method_exists($this, $fnName)) {
+                $fnName = '$this->' . $fnName;
             }
             if ($i === 1) {
                 $prev = $fnName . '(' . $array[0];
@@ -3674,7 +3695,7 @@ class BladeOne
         $exp = \explode(',', $ex);
         $file = $this->stripQuotes(isset($exp[0]) ? $exp[0] : null);
         $fileC = $this->getCompiledFile($file);
-        if (!@\file_exists($fileC)) {
+        if (!@\is_file($fileC)) {
             // if the file doesn't exist then it's created
             $this->compile($file, true);
         }
