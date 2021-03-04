@@ -25,7 +25,6 @@ When I made a new view file, I always do include and include the assets file. An
 This `initialize(string)` function is used to tell the Generator which asset will use. In case the default value is `default`, and you can see this 3 use case is same too.
 
   return Generate::default('your_view_name');
-  return Generate::initialize()->default('your_view_name');
   return Generate::initialize('default')->default('your_view_name');
 
 Anyway I include <a href="https://getstisla.com" target="_blank">Stisla</a> at this library. And here is the use case.
