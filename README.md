@@ -1,7 +1,7 @@
 # BHPGenerator v3.1
 Template engine for CodeIgniter 4 (You can load Bootstrap, Bulma, Stisla or etc here).
 
-![GitHub](https://img.shields.io/github/license/mjamilasfihani/BHPGenerator) ![GitHub all releases](https://img.shields.io/github/downloads/mjamilasfihani/BHPGenerator/total)
+![GitHub](https://img.shields.io/github/license/mjamilasfihani/BHPGenerator) ![GitHub all releases](https://img.shields.io/github/downloads/mjamilasfihani/BHPGenerator/total) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mjamilasfihani/BHPGenerator)
 
 ## Why I made this Library?
 When I made a new view file, I always do include and include the assets file. And I hate when I need to reconfig everything manually, in case different meta, css, js or title. So I made this library.
