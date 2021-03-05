@@ -64,13 +64,18 @@ class View
     // Creating blade view (basic)
     // The default path is app/Views
     // Dynamic path will coming soon :)
-    public static function blade(string $name = '', array $data = [], string $cachePath = null)
+    public static function blade(string $name = '', array $data = [], string $cachePath = null, string $pipe = false)
     {
         $viewPath  = config('Paths')->viewDirectory;
         $cachePath = is_null($cachePath) ? config('Cache')->storePath : $cachePath;
 
         $blade = new \BHPGenerator\Core\Blade\BladeOne($viewPath, $cachePath);
         $view  = '';
+
+        if ($pipe == true)
+        {
+            $blade->pipeEnable = $pipe;
+        }
 
         if (strpos($name, '::'))
         {
