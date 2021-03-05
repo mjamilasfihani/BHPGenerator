@@ -2,8 +2,6 @@
 
 namespace BHPGenerator\Core;
 
-use BHPGenerator\Core\Blade\BladeOne;
-
 class View
 {
 
@@ -66,10 +64,13 @@ class View
     // Creating blade view (basic)
     // The default path is app/Views
     // Dynamic path will coming soon :)
-    public static function blade(string $name = '', array $data = [])
+    public static function blade(string $name = '', array $data = [], string $cachePath = null)
     {
-        $blade = new BladeOne(config('Paths')->viewDirectory, config('Cache')->storePath);
-        $view   = '';
+        $viewPath  = config('Paths')->viewDirectory;
+        $cachePath = is_null($cachePath) ? config('Cache')->storePath : $cachePath;
+
+        $blade = new \BHPGenerator\Core\Blade\BladeOne($viewPath, $cachePath);
+        $view  = '';
 
         if (strpos($name, '::'))
         {

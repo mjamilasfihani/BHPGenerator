@@ -199,9 +199,9 @@ class Generate
 	 *
 	 * @var string, array
 	 */
-	public static function blade(string $name = '', array $data = [])
+	public static function blade(string $name = '', array $data = [], string $cachePath = null)
 	{
-		return self::__('blade', $name, $data);
+		return self::__('blade', $name, $data, $cachePath);
 	}
 
 }
