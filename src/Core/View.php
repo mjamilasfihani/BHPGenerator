@@ -6,7 +6,7 @@ class View
 {
 
     // Creating default view (basic)
-    public static function default(string $name = '', array $data = [], array $optional = [])
+    public static function default(string $name = '', array $data = [], array $options = [])
     {
         $view = '';
 
@@ -16,34 +16,34 @@ class View
 
             for ($i=0; $i <= substr_count($name, '::'); $i++)
             { 
-                $view .= view($explode[$i], $data, $optional);
+                $view .= view($explode[$i], $data, $options);
             }
         }
 
-        return empty($view) ? view($name, $data, $optional) : $view;
+        return empty($view) ? view($name, $data, $options) : $view;
     }
 
     // Creating parser view (basic)
-	public static function parser(string $name = '', array $data = [], array $optional = [])
+	public static function parser(string $view = '', array $data = [], array $options = [])
     {
     	$parser = single_service('parser');
         $view   = '';
 
-        if (strpos($name, '::'))
+        if (strpos($view, '::'))
         {
-            $explode = explode('::', $name);
+            $explode = explode('::', $view);
 
-            for ($i=0; $i <= substr_count($name, '::'); $i++)
+            for ($i=0; $i <= substr_count($view, '::'); $i++)
             { 
-                $view .= $parser->setData($data)->render($explode[$i], $optional);
+                $view .= $parser->setData($data)->render($explode[$i], $options);
             }
         }
 
-        return empty($view) ? $parser->setData($data)->render($name, $optional) : $view;
+        return empty($view) ? $parser->setData($data)->render($view, $options) : $view;
     }
 
     // Creating parser view (string)
-    public static function parser_string(string $template = '', array $data = [], array $optional = [])
+    public static function parser_string(string $template = '', array $data = [], array $options = [])
     {
         $parser = single_service('parser');
         $view   = '';
@@ -54,28 +54,21 @@ class View
 
             for ($i=0; $i <= substr_count($template, '::'); $i++)
             { 
-                $view .= $parser->setData($data)->renderString($explode[$i], $optional);
+                $view .= $parser->setData($data)->renderString($explode[$i], $options);
             }
         }
 
-        return empty($view) ? $parser->setData($data)->renderString($template, $optional) : $view;
+        return empty($view) ? $parser->setData($data)->renderString($template, $options) : $view;
     }
 
-    // Creating blade view (basic)
-    // The default path is app/Views
-    // Dynamic path will coming soon :)
-    public static function blade(string $name = '', array $data = [], string $cachePath = null, string $pipe = false)
+    // Blade version | Under Development
+    public static function blade(string $name = '', array $data = [])
     {
         $viewPath  = config('Paths')->viewDirectory;
-        $cachePath = is_null($cachePath) ? config('Cache')->storePath : $cachePath;
+        $cachePath = config('Cache')->storePath;
 
         $blade = new \BHPGenerator\Core\Blade\BladeOne($viewPath, $cachePath);
         $view  = '';
-
-        if ($pipe == true)
-        {
-            $blade->pipeEnable = $pipe;
-        }
 
         if (strpos($name, '::'))
         {

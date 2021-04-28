@@ -157,9 +157,9 @@ class Generate
 	 *
 	 * @var string, array, array
 	 */
-	public static function default(string $name = '', array $data = [], array $optional = [])
+	public static function default(string $name = '', array $data = [], array $options = [])
 	{
-		return self::__('default', $name, $data, $optional);
+		return self::__('default', $name, $data, $options);
 	}
 
 	/**
@@ -171,9 +171,9 @@ class Generate
 	 *
 	 * @var string, array, array
 	 */
-	public static function parser(string $name = '', array $data = [], array $optional = [])
+	public static function parser(string $view = '', array $data = [], array $options = [])
 	{
-		return self::__('parser', $name, $data, $optional);
+		return self::__('parser', $view, $data, $options);
 	}
 
 	/**
@@ -185,9 +185,9 @@ class Generate
 	 *
 	 * @var string, array, array
 	 */
-	public static function parser_string(string $template = '', array $data = [], array $optional = [])
+	public static function parser_string(string $template = '', array $data = [], array $options = [])
 	{
-		return self::__('parser_string', $template, $data, $optional);
+		return self::__('parser_string', $template, $data, $options);
 	}
 
 	/**
@@ -199,9 +199,9 @@ class Generate
 	 *
 	 * @var string, array
 	 */
-	public static function blade(string $name = '', array $data = [], string $cachePath = null, string $pipe = false)
+	public static function blade(string $name = '', array $data = [])
 	{
-		return self::__('blade', $name, $data, $cachePath, $pipe);
+		return self::__('blade', $name, $data;
 	}
 
 }
