@@ -7,7 +7,7 @@ use BHPGenerator\Generate;
 class Header
 {
 	
-	public static function generate(string $asset = 'default', array $html_ = [], array $body_ = [], array $meta_ = [])
+	public static function generate(string $asset = 'default', array $_html = [], array $_body = [], array $_meta = [])
 	{
 		// Initialize
 		if (isset(Generate::$css_js['replace']))
@@ -19,9 +19,9 @@ class Header
 			$assets = array_merge(config('\BHPGenerator\Config\Assets')->$asset, Generate::$css_js);
 		}
 
-		$body   = config('\BHPGenerator\Config\Body');
-		$html   = config('\BHPGenerator\Config\Html');
-		$meta   = config('\BHPGenerator\Config\Meta');
+		$body = config('\BHPGenerator\Config\Body');
+		$html = config('\BHPGenerator\Config\Html');
+		$meta = config('\BHPGenerator\Config\Meta');
 
 		//--------------------------------------------------------------------
 		// Initialize | Doctype tag.
@@ -33,7 +33,7 @@ class Header
 		// Open | Html tag.
 		//--------------------------------------------------------------------
 
-		$str .= '<html lang="'.($html_['language'] ?? (empty($html->language) ? config('App')->defaultLocale : $html->language)).'">';
+		$str .= '<html lang="'.($_html['language'] ?? (empty($html->language) ? config('App')->defaultLocale : $html->language)).'">';
 
 		//--------------------------------------------------------------------
 		// Open | Head tag.
@@ -51,22 +51,24 @@ class Header
 		// Initialize | Meta tag.
 		//--------------------------------------------------------------------
 
-		$meta_ = array_merge($meta_, ['keywords' => implode(', ', $meta_['keywords'] ?? [])]);
+		# Merge meta with 'name' attribute
+		$metaAttributeName = array_merge([
+			'description' => $meta->description,
+			'keywords'    => implode(', ', $meta->keywords),
+			'author'      => $meta->author,
+			'viewport'    => $meta->viewport
+		], self::cleaner($meta->attributeName), $_meta);
 
-		$attr = array_merge([
-			'description' => $meta_['description'] ?? $meta->description,
-			'keywords'    => $meta_['keywords']    ?? implode(', ', $meta->keywords),
-			'author'      => $meta_['author']      ?? $meta->author,
-			'viewport'    => $meta_['viewport']    ?? $meta->viewport], $meta->attributeName, $meta_);
-
-		if (! empty($attr))
+		# Meta with name attribute
+		if (! empty($metaAttributeName))
 		{
-			foreach ($attr as $name => $value)
+			foreach ($metaAttributeName as $name => $value)
 			{
-				$str .= self::meta($name, $value);
+				$str .= self::meta($name, $value, 'name');
 			}
 		}
 		
+		# Meta with http-equiv attribute
 		if (! empty($meta->attributeHttpEquiv))
 		{
 			foreach ($meta->attributeHttpEquiv as $name => $value)
@@ -75,6 +77,7 @@ class Header
 			}
 		}
 
+		# Meta with property attribute
 		if (! empty($meta->attributeProperty))
 		{
 			foreach ($meta->attributeProperty as $name => $value)
@@ -152,7 +155,7 @@ class Header
 		// Initialize | Title tag.
 		//--------------------------------------------------------------------
 
-		$str .= '<title>'.($html_['title'] ?? $html->title).'</title>';
+		$str .= '<title>'.($_html['title'] ?? $html->title).'</title>';
 
 		//--------------------------------------------------------------------
 		// Close | Head tag.
@@ -164,7 +167,7 @@ class Header
 		// Initialize | Body attr
 		//--------------------------------------------------------------------
 
-		$str .= '<body'.stringify_attributes(array_merge($body->attributes, $body_)).'>';
+		$str .= '<body'.stringify_attributes(array_merge($body->attributes, $_body)).'>';
 
 		//--------------------------------------------------------------------
 		// Everything is done, now load content.
@@ -193,6 +196,32 @@ class Header
 		}
 
 		return $str;
+	}
+
+	// Meta cleaner for 'name' attribute.
+	protected static function cleaner(array $attributeName = [])
+	{
+		if (array_key_exists('description', $attributeName))
+		{
+			$attributeName = array_merge($attributeName, ['description' => '']);
+		}
+
+		if (array_key_exists('keywords', $attributeName))
+		{
+			$attributeName = array_merge($attributeName, ['keywords' => '']);
+		}
+
+		if (array_key_exists('author', $attributeName))
+		{
+			$attributeName = array_merge($attributeName, ['author' => '']);
+		}
+
+		if (array_key_exists('viewport', $attributeName))
+		{
+			$attributeName = array_merge($attributeName, ['viewport' => '']);
+		}
+		
+		return $attributeName;
 	}
 	
 }

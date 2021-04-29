@@ -62,6 +62,8 @@ class Meta extends BaseConfig
 	 *
 	 * This config will generate <meta name="name" content="..." />
 	 *
+	 * Do not EVER set meta description, keywords, author and viewport in here :)
+	 *
 	 * @see https://gist.github.com/lancejpollard/1978404
 	 * @var array
 	 */
@@ -69,7 +71,7 @@ class Meta extends BaseConfig
 
 	/**
 	 * --------------------------------------------------------------------------
-	 * http-equiv Attribute
+	 * http-equiv Attribute - Special Config
 	 * --------------------------------------------------------------------------
 	 *
 	 * This will generate <meta http-equiv="name" content="..." />
@@ -80,7 +82,7 @@ class Meta extends BaseConfig
 
 	/**
 	 * --------------------------------------------------------------------------
-	 * property Attribute
+	 * property Attribute -  Special Config
 	 * --------------------------------------------------------------------------
 	 *
 	 * This will generate <meta property="name" content="..." />
