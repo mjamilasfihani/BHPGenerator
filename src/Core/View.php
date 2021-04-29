@@ -43,7 +43,7 @@ class View
     }
 
     // Creating parser view (string)
-    public static function parser_string(string $template = '', array $data = [], array $options = [])
+    public static function parserString(string $template = '', array $data = [], array $options = [])
     {
         $parser = single_service('parser');
         $view   = '';
@@ -64,8 +64,8 @@ class View
     // Blade version | Under Development
     public static function blade(string $name = '', array $data = [])
     {
-        $viewPath  = config('Paths')->viewDirectory;
-        $cachePath = config('Cache')->storePath;
+        $viewPath  = config('Paths')->viewDirectory; // this section is under development
+        $cachePath = config('Cache')->storePath;     // this section is under development
 
         $blade = new \BHPGenerator\Core\Blade\BladeOne($viewPath, $cachePath);
         $view  = '';

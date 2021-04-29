@@ -70,9 +70,9 @@ class Generate
 	 *
 	 * @var string
 	 */
-	public static function initialize(string $config = '')
+	public static function initialize(string $asset = '')
     {
-        return new Generate($config);
+        return new Generate($asset);
     }
 
     /**
@@ -134,22 +134,6 @@ class Generate
 
 	/**
 	 * --------------------------------------------------------------------------
-	 * Render The View
-	 * --------------------------------------------------------------------------
-	 *
-	 * We need to render the view before return it to the controller.
-	 *
-	 * @var string, string, array, array
-	 */
-	protected static function __(string $view = '', string $name = '', array $data = [], array $optional = [])
-	{
-		return Header::generate(self::$asset, self::$html, self::$body, self::$meta) .
-			   View::$view($name, $data, $optional) .
-			   Footer::generate(self::$asset);		       
-	}
-
-	/**
-	 * --------------------------------------------------------------------------
 	 * Default
 	 * --------------------------------------------------------------------------
 	 *
@@ -159,7 +143,9 @@ class Generate
 	 */
 	public static function default(string $name = '', array $data = [], array $options = [])
 	{
-		return self::__('default', $name, $data, $options);
+		return Header::generate(self::$asset, self::$html, self::$body, self::$meta) .
+			   View::default($name, $data, $options) .
+			   Footer::generate(self::$asset);
 	}
 
 	/**
@@ -173,7 +159,9 @@ class Generate
 	 */
 	public static function parser(string $view = '', array $data = [], array $options = [])
 	{
-		return self::__('parser', $view, $data, $options);
+		return Header::generate(self::$asset, self::$html, self::$body, self::$meta) .
+			   View::parser($view, $data, $options) .
+			   Footer::generate(self::$asset);
 	}
 
 	/**
@@ -185,9 +173,11 @@ class Generate
 	 *
 	 * @var string, array, array
 	 */
-	public static function parser_string(string $template = '', array $data = [], array $options = [])
+	public static function parserString(string $template = '', array $data = [], array $options = [])
 	{
-		return self::__('parser_string', $template, $data, $options);
+		return Header::generate(self::$asset, self::$html, self::$body, self::$meta) .
+			   View::parserString($template, $data, $options) .
+			   Footer::generate(self::$asset);
 	}
 
 	/**
@@ -201,7 +191,9 @@ class Generate
 	 */
 	public static function blade(string $name = '', array $data = [])
 	{
-		return self::__('blade', $name, $data;
+		return Header::generate(self::$asset, self::$html, self::$body, self::$meta) .
+			   View::blade($name, $data) .
+			   Footer::generate(self::$asset);
 	}
 
 }
