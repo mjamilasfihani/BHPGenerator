@@ -7,7 +7,7 @@ use BHPGenerator\Generate;
 class Header
 {
 	
-	public static function generate(string $asset = 'default', array $_html = [], array $_body = [], array $_meta = [])
+	public static function generate(string $asset = 'default', array $_html = [], array $_body = [], array $_meta = [], array $_metaHttpEquiv = [], array $_metaProperty = [])
 	{
 		// Initialize
 		if (isset(Generate::$css_js['replace']))
@@ -68,19 +68,25 @@ class Header
 			}
 		}
 		
+		# Merge meta with 'http-equiv' attribute
+		$metaAttributeHttpEquiv = array_merge($meta->attributeHttpEquiv, $_metaHttpEquiv);
+
 		# Meta with http-equiv attribute
-		if (! empty($meta->attributeHttpEquiv))
+		if (! empty($metaAttributeHttpEquiv))
 		{
-			foreach ($meta->attributeHttpEquiv as $name => $value)
+			foreach ($metaAttributeHttpEquiv as $name => $value)
 			{
 				$str .= self::meta($name, $value, 'http-equiv');
 			}
 		}
 
+		# Merge meta with 'property' attribute
+		$metaProperty = array_merge($meta->attributeProperty, $_metaProperty);
+
 		# Meta with property attribute
-		if (! empty($meta->attributeProperty))
+		if (! empty($metaProperty))
 		{
-			foreach ($meta->attributeProperty as $name => $value)
+			foreach ($metaProperty as $name => $value)
 			{
 				$str .= self::meta($name, $value, 'property');
 			}
@@ -201,6 +207,8 @@ class Header
 	// Meta cleaner for 'name' attribute.
 	protected static function cleaner(array $attributeName = [])
 	{
+		$attributeName = [];
+
 		if (array_key_exists('description', $attributeName))
 		{
 			$attributeName = array_merge($attributeName, ['description' => '']);

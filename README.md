@@ -1,4 +1,4 @@
-# BHPGenerator v3.2.1
+# BHPGenerator v3.2.2
 Template engine for CodeIgniter 4 (You can load Bootstrap, Bulma, Stisla or etc here).
 
 ![GitHub](https://img.shields.io/github/license/mjamilasfihani/BHPGenerator) ![GitHub all releases](https://img.shields.io/github/downloads/mjamilasfihani/BHPGenerator/total) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mjamilasfihani/BHPGenerator)
@@ -42,6 +42,8 @@ I have created an extra function too.
   1. `html([])` function is used to re-config `src/Config/Html.php` (languange and title).
   2. `meta([])` function is used to re / add new config `src/Config/Meta.php` (meta with 'name' attribute).
   3. `body([])` function is used to re / add new config `src/Config/Body.php` (attributes only).
+  4. `metaHttpEquiv([])` function is used to re / add new config `src/Config/Meta.php` (meta with 'http-equiv' attribute).
+  5. `metaProperty([])` function is used to re / add new config `src/Config/Meta.php` (meta with 'property' attribute).
 
 ## Directly Asset?
 You can add spesific asset for spesific controller, and how to do that?

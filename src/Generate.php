@@ -44,6 +44,21 @@ class Generate
 	 */
     protected static $meta = [];
 
+    /**
+     * Object of Meta Http Equiv name
+     *
+     * @var array
+     */
+    protected static $metaHttpEquiv = [];
+
+    /**
+     * Object of Meta Property name
+     *
+     *
+     * @var array
+     */
+    protected static $metaProperty = [];
+
 	/**
 	 * --------------------------------------------------------------------------
 	 * Constructor
@@ -53,12 +68,14 @@ class Generate
 	 *
 	 * @var mix
 	 */
-	protected function __construct(string $config = '', array $html = [], array $body = [], array $meta = [])
+	protected function __construct(string $config = '', array $html = [], array $body = [], array $meta = [], array $metaHttpEquiv = [], array $metaProperty = [])
 	{
-		self::$asset = empty($config) ? self::$asset : $config;
-		self::$html  = $html;
-		self::$body  = $body;
-		self::$meta  = $meta;
+		self::$asset         = empty($config) ? self::$asset : $config;
+		self::$html          = $html;
+		self::$body          = $body;
+		self::$meta          = $meta;
+		self::$metaHttpEquiv = $metaHttpEquiv;
+		self::$metaProperty  = $metaProperty;
 	}
 
 	/**
@@ -91,7 +108,7 @@ class Generate
 	 */
     public static function html(array $config = [])
     {
-    	return new Generate(self::$asset, $config, self::$body, self::$meta);
+    	return new Generate(self::$asset, $config, self::$body, self::$meta, self::$metaHttpEquiv, self::$metaProperty);
     }
 
     /**
@@ -110,7 +127,7 @@ class Generate
 	 */
     public static function body(array $config = [])
     {
-    	return new Generate(self::$asset, self::$html, $config, self::$meta);
+    	return new Generate(self::$asset, self::$html, $config, self::$meta, self::$metaHttpEquiv, self::$metaProperty);
     }
 
     /**
@@ -123,13 +140,47 @@ class Generate
 	 * 
 	 * ->meta([])->
 	 *
-	 * You can change all the meta.
+	 * You can change all the meta | name attribute.
 	 *
 	 * @var array
 	 */
     public static function meta(array $config = [])
     {
-    	return new Generate(self::$asset, self::$html, self::$body, $config);
+    	return new Generate(self::$asset, self::$html, self::$body, $config, self::$metaHttpEquiv, self::$metaProperty);
+    }
+
+    /**
+     * --------------------------------------------------------------------------
+     * Meta HttpEquiv attribute
+     * --------------------------------------------------------------------------
+     *
+     * Use metaHttpEquiv(array) object if you want to set the http-equiv meta's
+     * attribute. The available configuration is :
+     *
+     * ->metaHttpEquiv([])->
+     *
+     * @var array
+     */
+    public static function metaHttpEquiv(array $config = [])
+    {
+    	return new Generate(self::$asset, self::$html, self::$body, self::$meta, $config, self::$metaProperty);
+    }
+
+    /**
+     * --------------------------------------------------------------------------
+     * Meta Property attribute
+     * --------------------------------------------------------------------------
+     *
+     * Use metaProperty(array) object if you want to set the property meta's
+     * attribute. The available configuration is :
+     *
+     * ->metaProperty([])->
+     *
+     * @var array
+     */
+    public static function metaProperty(array $config = [])
+    {
+    	return new Generate(self::$asset, self::$html, self::$body, self::$meta, self::$metaHttpEquiv, $config);
     }
 
 	/**
@@ -143,7 +194,7 @@ class Generate
 	 */
 	public static function default(string $name = '', array $data = [], array $options = [])
 	{
-		return Header::generate(self::$asset, self::$html, self::$body, self::$meta) .
+		return Header::generate(self::$asset, self::$html, self::$body, self::$meta, self::$metaHttpEquiv, self::$metaProperty) .
 			   View::default($name, $data, $options) .
 			   Footer::generate(self::$asset);
 	}
@@ -159,7 +210,7 @@ class Generate
 	 */
 	public static function parser(string $view = '', array $data = [], array $options = [])
 	{
-		return Header::generate(self::$asset, self::$html, self::$body, self::$meta) .
+		return Header::generate(self::$asset, self::$html, self::$body, self::$meta, self::$metaHttpEquiv, self::$metaProperty) .
 			   View::parser($view, $data, $options) .
 			   Footer::generate(self::$asset);
 	}
@@ -175,7 +226,7 @@ class Generate
 	 */
 	public static function parserString(string $template = '', array $data = [], array $options = [])
 	{
-		return Header::generate(self::$asset, self::$html, self::$body, self::$meta) .
+		return Header::generate(self::$asset, self::$html, self::$body, self::$meta, self::$metaHttpEquiv, self::$metaProperty) .
 			   View::parserString($template, $data, $options) .
 			   Footer::generate(self::$asset);
 	}
@@ -191,7 +242,7 @@ class Generate
 	 */
 	public static function blade(string $name = '', array $data = [])
 	{
-		return Header::generate(self::$asset, self::$html, self::$body, self::$meta) .
+		return Header::generate(self::$asset, self::$html, self::$body, self::$meta, self::$metaHttpEquiv, self::$metaProperty) .
 			   View::blade($name, $data) .
 			   Footer::generate(self::$asset);
 	}
