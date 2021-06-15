@@ -22,9 +22,8 @@ When I made a new view file, I always do include and include the assets file. An
   1. If you have more than 1 view files, then separate your view using `::`.
   2. So, your view will be `Generate::view('view_1::view_2::view_3')`
 
-This `initialize(string)` function is used to tell the Generator which asset will use. In case the default value is `default`, and you can see this 3 use case is same too.
+This `initialize(string)` function is used to tell the Generator which asset will be used. The default value is `default`.
 
-    return Generate::default('your_view_name');
     return Generate::initialize('default')->default('your_view_name');
 
 Anyway I include <a href="https://getstisla.com" target="_blank">Stisla</a> at this library. And here is the use case.
@@ -69,6 +68,6 @@ Here I give an extra use case.
 
     return Generate::meta(['description' => 'New Description in Meta'])->body(['id' => 'app'])->default('your_view_name');
 
-Note : change default with `parser('your_view_name')` will use parser feature in CI 4 or `parserString('your_view_name')` for `renderString()` in parser and has simillar param with the default. You can also use `blade('your_view_name')` if you want to use blade version.
+Note : change default with `parser('your_view_name')` will use parser feature in CI 4 or `parserString('your_view_name')` for `renderString()` in parser and has simillar param with the default. You can also use `blade('your_view_name')` if you want to use blade version (under development).
 
 Blade library by https://github.com/EFTEC/BladeOne and Default assets by https://getbootstrap.com/
