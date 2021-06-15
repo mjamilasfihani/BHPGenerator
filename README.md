@@ -34,7 +34,7 @@ Anyway I include <a href="https://getstisla.com" target="_blank">Stisla</a> at t
 Or
 
     $this->BHP = Generate::initialize('stisla'); // create an BHPGenerator object
-    $this->BHP->default('your_view_name'); // loading view with Stisla asset
+    $this->BHP->default('your_view_name');       // loading view with Stisla asset
 
 ## Builtin Function
 I have created an extra function too.
