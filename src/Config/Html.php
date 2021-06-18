@@ -33,7 +33,7 @@ class Html extends BaseConfig
 	 *
 	 * In modern browser or HTML5 the default charset is UTF-8, if you have
 	 * another option it's up to you. Leave it blank it will use charset from
-	 * App.php
+	 * app/Confif/App.php
 	 *
 	 * @var string
 	 */
@@ -49,7 +49,7 @@ class Html extends BaseConfig
 	 * search engines and browsers. - W3SCHOOLS.COM
 	 *
 	 * You could set this variable as you want. Leave it blank it will use
-	 * defaultLocale from App.php
+	 * defaultLocale from app/Config/App.php
 	 *
 	 * @var string
 	 */
