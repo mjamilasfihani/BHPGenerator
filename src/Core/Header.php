@@ -207,29 +207,20 @@ class Header
 	// Meta cleaner for 'name' attribute.
 	protected static function cleaner(array $attributeName = [])
 	{
-		$attributeName = [];
-
-		if (array_key_exists('description', $attributeName))
-		{
-			$attributeName = array_merge($attributeName, ['description' => '']);
-		}
-
-		if (array_key_exists('keywords', $attributeName))
-		{
-			$attributeName = array_merge($attributeName, ['keywords' => '']);
-		}
-
-		if (array_key_exists('author', $attributeName))
-		{
-			$attributeName = array_merge($attributeName, ['author' => '']);
-		}
-
-		if (array_key_exists('viewport', $attributeName))
-		{
-			$attributeName = array_merge($attributeName, ['viewport' => '']);
-		}
-		
-		return $attributeName;
+	  $meta[0] = array_key_exists('description', $attributeName) ?: false;
+	  $meta[1] = array_key_exists('keywords', $attributeName) ?: false;
+	  $meta[2] = array_key_exists('author', $attributeName) ?: false;
+	  $meta[3] = array_key_exists('viewport', $attributeName) ?: false;
+	  
+	  if ($meta[0] || $meta[1] || $meta[2] || $meta[3])
+	  {
+	    // end the execution
+	    die('do not fill the $attributeName!');
+	    return;
+	  }
+	  
+	  // yes we return it as an empty array
+	  return [];
 	}
 	
 }
