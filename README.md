@@ -1,5 +1,5 @@
 # BHPGenerator v3.2.2
-Template engine for CodeIgniter 4 (You can load Bootstrap, Bulma, Stisla or etc here).
+Assets loader (CSS & JS) for CodeIgniter 4 (You can load Bootstrap, Bulma, Stisla or etc here).
 
 ![GitHub](https://img.shields.io/github/license/mjamilasfihani/BHPGenerator) ![GitHub all releases](https://img.shields.io/github/downloads/mjamilasfihani/BHPGenerator/total) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mjamilasfihani/BHPGenerator)
 
@@ -68,6 +68,6 @@ Here I give an extra use case.
 
     return Generate::meta(['description' => 'New Description in Meta'])->body(['id' => 'app'])->default('your_view_name');
 
-Note : change default with `parser('your_view_name')` will use parser feature in CI 4 or `parserString('your_view_name')` for `renderString()` in parser and has simillar param with the default. You can also use `blade('your_view_name')` if you want to use blade version (under development).
+Note : change default with `parser('your_view_name')` will use parser feature in CI 4 or `parserString('your_view_name')` for `renderString()` in parser and has simillar param with the default. You can also use `blade('your_view_name', [$data])` if you want to use blade version (under development).
 
 Blade library by https://github.com/EFTEC/BladeOne and Default assets by https://getbootstrap.com/
