@@ -1,4 +1,6 @@
 # BHPGenerator v3.3.0
+For better performance please use this library https://github.com/mjamilasfihani/codeigniter-4-assets-generator
+
 Assets loader (CSS & JS) for CodeIgniter 4 (You can load Bootstrap, Bulma, Stisla or etc here).
 
 ![GitHub](https://img.shields.io/github/license/mjamilasfihani/BHPGenerator) ![GitHub all releases](https://img.shields.io/github/downloads/mjamilasfihani/BHPGenerator/total) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mjamilasfihani/BHPGenerator)
