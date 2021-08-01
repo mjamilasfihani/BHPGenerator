@@ -1,4 +1,4 @@
-# BHPGenerator v3.3.0
+# This version now abandoned :) Wait for the v4.0.0
 For better performance please use this library https://github.com/mjamilasfihani/codeigniter-4-assets-generator
 
 Assets loader (CSS & JS) for CodeIgniter 4 (You can load Bootstrap, Bulma, Stisla or etc here).
