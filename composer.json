@@ -1,0 +1,13 @@
+{
+    "name": "bhpgenerator/v4.x",
+    "description": "New version of github.com/BHPGenerator",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mjamilasfihani",
+            "email": "mohammadjamilasfihani@gmail.com"
+        }
+    ],
+    "require": {}
+}
