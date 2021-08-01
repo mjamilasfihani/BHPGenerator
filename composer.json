@@ -2,11 +2,20 @@
     "name": "bhpgenerator/v4.x",
     "description": "New version of github.com/BHPGenerator",
     "type": "library",
+    "homepage": "https://github.com/mjamilasfihani/BHPGenerator",
     "license": "MIT",
     "authors": [
         {
             "name": "mjamilasfihani",
             "email": "mohammadjamilasfihani@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "php": "^7.3||^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BHP\\V4\\": "src"
+        }
+    }
 }
