@@ -1,0 +1,21 @@
+{
+    "name": "mjamilasfihani/bhp-generator",
+    "description": "Template engine (powered by BladeOne) and styling",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mjamilasfihani",
+            "email": "mohammadjamilasfihani@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "eftec/bladeone": "^3.52"
+    },
+    "autoload": {
+        "psr-4": {
+            "BHPGenerator\\": "src"
+        }
+    }
+}
