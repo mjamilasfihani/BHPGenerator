@@ -1,6 +1,6 @@
 {
     "name": "mjamilasfihani/bhp-generator",
-    "description": "Template engine (powered by BladeOne) and styling",
+    "description": "Template engine for CodeIgniter4 (standard, parser and blade) and styling",
     "type": "library",
     "license": "MIT",
     "authors": [
