@@ -1,8 +1,7 @@
 {
-    "name": "bhpgenerator/v4.x",
-    "description": "New version of github.com/BHPGenerator",
+    "name": "mjamilasfihani/bhp-generator",
+    "description": "Template engine (powered by BladeOne) and styling",
     "type": "library",
-    "homepage": "https://github.com/mjamilasfihani/BHPGenerator",
     "license": "MIT",
     "authors": [
         {
@@ -11,11 +10,12 @@
         }
     ],
     "require": {
-        "php": "^7.3||^8.0"
+        "php": "^8.0",
+        "eftec/bladeone": "^3.52"
     },
     "autoload": {
         "psr-4": {
-            "BHP\\V4\\": "src"
+            "BHPGenerator\\": "src"
         }
     }
 }

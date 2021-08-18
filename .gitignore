@@ -1,5 +1,2 @@
-#-------------------------
-# Composer
-#-------------------------
-vendor/
-composer.lock
+/vendor/
+/composer.lock
