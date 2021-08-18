@@ -1,6 +1,6 @@
 {
-    "name": "mjamilasfihani/bhp-generator",
-    "description": "Template engine for CodeIgniter4 (standard, parser and blade) plus styling",
+    "name": "mjamilasfihani/ci4-bladeone",
+    "description": "BladeOne template engine for CodeIgniter 4 ",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -11,12 +11,11 @@
     ],
     "require": {
         "php": "^8.0",
-        "eftec/bladeone": "^3.52",
-        "michalsn/minifier": "^1.2"
+        "eftec/bladeone": "^3.52"
     },
     "autoload": {
         "psr-4": {
-            "BHPGenerator\\": "src"
+            "Ci4\\BladeOne\\": "src"
         }
     }
 }

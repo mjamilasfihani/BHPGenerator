@@ -1,6 +1,8 @@
 <?php
 
-namespace BHPGenerator;
+namespace CI4\BladeOne;
+
+use Config\Services;
 
 /**
  * Generate class 
@@ -29,6 +31,7 @@ class Generate extends \BHPGenerator\Core\PreGenerate
 	 */
 	public static function initialize(string $name, array $data = [])
 	{
+		$loader = Services::locator(true);
 		return new self($name, $data);
 	}
 
